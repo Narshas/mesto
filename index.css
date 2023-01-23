@@ -1,0 +1,82 @@
+.root {
+    background-color: #000000;
+    max-width: 880px;
+    margin: 0 auto;
+    /* или сделать паддинги по бокам? */
+}
+
+/* ----- */
+.header {
+    padding: 45px 0 41px;
+    border-bottom: 1px solid #545454;
+    margin: 0 auto;
+}
+
+.header__logo {
+    width: 142px;
+    height: 33px;
+}
+
+/* ----- */
+.profile {
+    display: flex;
+    /* flex-wrap: wrap;
+    align-items: baseline; */
+    justify-content: space-between;
+    padding: 40px 0 51px;
+}
+
+.profile__avatar {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+/* ----- */
+.elements {
+    max-width: 880px;
+}
+
+.elements__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+    grid-gap: 20px 17px;
+}
+
+.elements__item {
+    background-color: #fff;
+    border-radius: 10px;
+    height: 361px;
+
+}
+
+.elements__block {}
+
+.elements__image {
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+    height: 282px;
+    width: 282px;
+
+}
+
+.elements__title {
+    margin: 0;
+    padding: 25px 15px 31px 21px;
+    font-weight: 900px;
+    font-size: 24px;
+    line-height: 29.05px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* ----- */
+
+.footer {
+    padding: 67px 0 60px;
+}
