@@ -5,6 +5,8 @@
     padding: 0 19px;
 }
 
+@media screen and (max-width:) {}
+
 /* @import url(../) импортировать шрифты */
 
 /* @media screen {
@@ -25,10 +27,11 @@ min-width: 320px; */
     height: 33px;
 }
 
-/* @media screen {
-    min-width: 880px) {}
+@media screen (min-width: 320px) {}
 
-} */
+}
+
+*/
 
 /* ----- */
 .profile {
@@ -81,6 +84,7 @@ min-width: 320px; */
 }
 
 .profile__edit-button {
+    padding: 0;
     width: 24px;
     height: 24px;
     background-image: url(./images/Edit-button.svg);
@@ -105,19 +109,36 @@ min-width: 320px; */
         flex-direction: column;
     }
 
+    .profile__avatar {
+        margin: 0 0 26px;
+
+    }
+
+    .profile__name {
+        margin: 0 10px 14px 0;
+        max-width: 254px;
+    }
+
+    .profile__about {
+        max-width: 282px;
+
+
+    }
+
     .profile__container {
         margin: 0 0 36px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        align-items: center;
     }
 
     .profile__add-button {
-        max-width: 282px;
+        width: 282px;
         background-image: url(./images/add-button-extra.svg);
     }
 }
 
+/* ----- */
 
 .elements__list {
     margin: 0;
