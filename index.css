@@ -2,14 +2,22 @@
     background-color: #000000;
     max-width: 880px;
     margin: 0 auto;
-    /* или сделать паддинги по бокам? */
+    padding: 0 19px;
 }
+
+/* @import url(../) импортировать шрифты */
+
+/* @media screen {
+    min-width: 319px;
+}
+
+min-width: 320px; */
 
 /* ----- */
 .header {
     padding: 45px 0 41px;
     border-bottom: 1px solid #545454;
-    margin: 0 auto;
+    margin: 0 auto 40px;
 }
 
 .header__logo {
@@ -17,13 +25,26 @@
     height: 33px;
 }
 
+/* @media screen {
+    min-width: 880px) {}
+
+} */
+
 /* ----- */
 .profile {
+    margin: 0 0 51px;
     display: flex;
-    /* flex-wrap: wrap;
-    align-items: baseline; */
+    /* flex-wrap: wrap; */
+    align-items: center;
     justify-content: space-between;
-    padding: 40px 0 51px;
+    color: #fff;
+    max-width: 880px;
+
+}
+
+.profile__container {
+    /* Обёртка, чтобы использоавться justify-content: space-between; */
+    display: flex;
 }
 
 .profile__avatar {
@@ -31,36 +52,103 @@
     width: 120px;
     height: 120px;
     object-fit: cover;
+    margin-right: 30px;
 }
 
-/* ----- */
-.elements {
-    max-width: 880px;
+.profile__info {
+    /* margin-right: 244px; */
+    display: flex;
+    flex-direction: column;
+    max-width: 336px;
+
 }
+
+.profile__wrapper {
+    display: flex;
+    margin-bottom: 16px;
+}
+
+.profile__name {
+    padding: 0;
+    margin: 0;
+    margin-right: 18px;
+    max-width: 294px;
+}
+
+.profile__about {
+    padding: 0;
+    margin: 0;
+}
+
+.profile__edit-button {
+    width: 24px;
+    height: 24px;
+    background-image: url(./images/Edit-button.svg);
+    background-color: transparent;
+    border: solid 1px #fff;
+    border-style: none;
+    background-repeat: no-repeat;
+}
+
+.profile__add-button {
+    width: 150px;
+    height: 50px;
+    background-image: url(./images/add-button.svg);
+    background-color: transparent;
+    border: solid 1px #fff;
+    border-style: none;
+    background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 618px) {
+    .profile {
+        flex-direction: column;
+    }
+
+    .profile__container {
+        margin: 0 0 36px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .profile__add-button {
+        max-width: 282px;
+        background-image: url(./images/add-button-extra.svg);
+    }
+}
+
 
 .elements__list {
     margin: 0;
     padding: 0;
     list-style: none;
     display: grid;
+    justify-content: center;
     grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
     grid-gap: 20px 17px;
+    max-width: 880px;
 }
 
 .elements__item {
     background-color: #fff;
     border-radius: 10px;
     height: 361px;
-
+    max-width: 282px;
+    margin: 0 auto;
+    padding: 0;
 }
 
-.elements__block {}
+.elements__block {
+    display: flex;
+}
 
 .elements__image {
     border-radius: 10px 10px 0 0;
     object-fit: cover;
     height: 282px;
     width: 282px;
+    border-style: none;
 
 }
 
@@ -75,8 +163,27 @@
     overflow: hidden;
 }
 
+.elements__like-button {
+    background-image: url(./images/like-disabled.svg);
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: solid 1px #000000;
+    border-style: none;
+    width: 22px;
+    height: 19px;
+    top: 30px;
+    right: 20px;
+    position: relative;
+
+}
+
 /* ----- */
 
 .footer {
     padding: 67px 0 60px;
+}
+
+.footer__copyright {
+    color: #545454;
 }
