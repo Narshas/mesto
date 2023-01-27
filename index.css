@@ -1,11 +1,13 @@
+@import url(./vendor/fonts/fonts.css);
+@import url(./vendor/normalize.css);
+
 .root {
     background-color: #000000;
+    font-family: 'Inter', ‘Arial’, sans-serif;
     max-width: 880px;
     margin: 0 auto;
     padding: 0 19px;
 }
-
-@media screen and (max-width:) {}
 
 /* @import url(../) импортировать шрифты */
 
@@ -27,17 +29,23 @@ min-width: 320px; */
     height: 33px;
 }
 
-@media screen (min-width: 320px) {}
-
+@media screen and (max-width: 618px) {
+    .header__logo {
+        width: 103.74px;
+        height: 24.4px;
+    }
 }
 
-*/
+/* @media screen (min-width: 320px) {}
+
+} */
+
+/* Не задаем ограничение ширины для всей страницы, а только для отдельных блоков */
 
 /* ----- */
 .profile {
     margin: 0 0 51px;
     display: flex;
-    /* flex-wrap: wrap; */
     align-items: center;
     justify-content: space-between;
     color: #fff;
@@ -59,7 +67,6 @@ min-width: 320px; */
 }
 
 .profile__info {
-    /* margin-right: 244px; */
     display: flex;
     flex-direction: column;
     max-width: 336px;
@@ -76,37 +83,49 @@ min-width: 320px; */
     margin: 0;
     margin-right: 18px;
     max-width: 294px;
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 1.14;
 }
 
 .profile__about {
     padding: 0;
     margin: 0;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.22;
 }
 
 .profile__edit-button {
     padding: 0;
+    margin: 0;
     width: 24px;
     height: 24px;
-    background-image: url(./images/Edit-button.svg);
+    background: url(./images/edit-button-L.svg);
     background-color: transparent;
     border: solid 1px #fff;
     border-style: none;
     background-repeat: no-repeat;
+    background-position: 50%;
 }
 
 .profile__add-button {
+    padding: 0;
+    margin: 0;
     width: 150px;
     height: 50px;
-    background-image: url(./images/add-button.svg);
+    background: url(./images/add-button-L.svg);
     background-color: transparent;
     border: solid 1px #fff;
     border-style: none;
     background-repeat: no-repeat;
+    background-position: 50%;
 }
 
 @media screen and (max-width: 618px) {
     .profile {
         flex-direction: column;
+        align-items: center;
     }
 
     .profile__avatar {
@@ -121,8 +140,6 @@ min-width: 320px; */
 
     .profile__about {
         max-width: 282px;
-
-
     }
 
     .profile__container {
@@ -132,9 +149,16 @@ min-width: 320px; */
         align-items: center;
     }
 
+    .profile__edit-button {
+        width: 18px;
+        height: 18px;
+        background: url(./images/edit-button-18.svg);
+        /* как отцентрировать изображение в этом контейнере */
+    }
+
     .profile__add-button {
         width: 282px;
-        background-image: url(./images/add-button-extra.svg);
+        background: url(./images/add-button-extra.svg);
     }
 }
 
@@ -178,7 +202,7 @@ min-width: 320px; */
     padding: 25px 15px 31px 21px;
     font-weight: 900px;
     font-size: 24px;
-    line-height: 29.05px;
+    line-height: 1.2;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -207,4 +231,10 @@ min-width: 320px; */
 
 .footer__copyright {
     color: #545454;
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.22;
+
 }
