@@ -19,18 +19,14 @@
     <main class="content">
 
         <section class="profile">
-            <button type="button" class="profile__avatar-button">
-                <img src="./images/yet_another_travaller.jpg" alt="фото пользователя" class="profile__avatar">
-            </button>
-
+            <img src="./images/yet_another_travaller.jpg" alt="фото пользователя" class="profile__avatar">
             <div class="profile__info">
-                <h1 class="profile__name">Имя</h1>
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <button type="button" class="profile__edit-button"></button>
-                <p class="profile__about">Обо мне</p>
+                <p class="profile__about">Исследователь океана</p>
             </div>
 
             <button type="button" class="profile__add-button"></button>
-
         </section>
 
         <section class="elements">
@@ -84,6 +80,20 @@
                 </li>
             </ul>
 
+        </section>
+
+        <section class="popup">
+            <div class="popup__container">
+                <button type="button">Закрыть форму</button>
+                <h3 class="popup__title">Редактировать профиль</h3>
+                <form class="popup__form" name="profile__info">
+                    <label for="username-input" class="popup__label"></label>
+                    <input id="username-input" type="text" placeholder="Как вас зовут" class="popup__input">
+                    <label for="about-input" class="popup__label"></label>
+                    <input id="about-input" type="text" placeholder="Несколько слов о вас" class="popup__input">
+                    <button type="submit" class="popup__submit">Сохранить</button>
+                </form>
+            </div>
         </section>
     </main>
 
