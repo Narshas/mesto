@@ -256,7 +256,7 @@ min-width: 320px; */
 @media screen and (max-width: 618px) {
     .popup__container {
         max-width: 282px;
-        min-height: 322px;
+        max-height: 322px;
         padding: 25px 22px;
     }
 
@@ -269,10 +269,10 @@ min-width: 320px; */
     width: 32px;
     height: 32px;
     border: 0;
-    /* background-color: transparent; */
+    background-color: transparent;
     position: absolute;
-    top: -35px;
-    right: -35px;
+    top: -40px;
+    right: -40px;
 }
 
 .popup__close:hover {
@@ -281,11 +281,11 @@ min-width: 320px; */
 
 @media screen and (max-width: 618px) {
     .popup__close {
+        /* background-image: url(./images/close-Icon-mobile.svg); */
         width: 20px;
         height: 20px;
-        /* right: 0; */
-        top: -16px;
-        /* background-size: 20px; */
+        right: 0;
+        background-size: 20px;
     }
 }
 
