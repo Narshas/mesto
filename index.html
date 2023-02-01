@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto: Russia</title>
     <link rel="stylesheet" href="./index.css">
+    <script src="./script.js"></script>
 
 </head>
 
@@ -32,9 +33,9 @@
         <section class="elements">
             <ul class="elements__list">
                 <li class="elements__item">
-                    <img src="" alt="" class="elements__image">
+                    <img src="./images/petropavlovsk-kamchatskiy.jpeg" alt="" class="elements__image">
                     <div class="elements__block">
-                        <h2 class="elements__title">Санкт-Петербург</h2>
+                        <h2 class="elements__title">Петропавловск-Камчатский</h2>
                         <button class="elements__like-button"></button>
                     </div>
                 </li>
@@ -48,33 +49,33 @@
                 </li>
 
                 <li class="elements__item">
-                    <img src="./images/sankt-peterburg.jpg" alt="" class="elements__image">
+                    <img src="./images/serpuhov.jpg" alt="" class="elements__image">
                     <div class="elements__block">
-                        <h2 class="elements__title">Санкт-Петербург</h2>
+                        <h2 class="elements__title">Серпухов</h2>
                         <button class="elements__like-button"></button>
                     </div>
                 </li>
 
                 <li class="elements__item">
-                    <img src="./images/sankt-peterburg.jpg" alt="" class="elements__image">
+                    <img src="./images/solovki.jpg" alt="" class="elements__image">
                     <div class="elements__block">
-                        <h2 class="elements__title">Санкт-Петербург</h2>
+                        <h2 class="elements__title">Соловки</h2>
                         <button class="elements__like-button"></button>
                     </div>
                 </li>
 
                 <li class="elements__item">
-                    <img src="./images/sankt-peterburg.jpg" alt="" class="elements__image">
+                    <img src="./images/kaliningrad.jpg" alt="" class="elements__image">
                     <div class="elements__block">
-                        <h2 class="elements__title">Санкт-Петербург</h2>
+                        <h2 class="elements__title">Калининград</h2>
                         <button class="elements__like-button"></button>
                     </div>
                 </li>
 
                 <li class="elements__item">
-                    <img src="./images/sankt-peterburg.jpg" alt="" class="elements__image">
+                    <img src="./images/moscow.jpg" alt="" class="elements__image">
                     <div class="elements__block">
-                        <h2 class="elements__title">Санкт-Петербург</h2>
+                        <h2 class="elements__title">Москва</h2>
                         <button class="elements__like-button"></button>
                     </div>
                 </li>
@@ -82,15 +83,15 @@
 
         </section>
 
-        <section class="popup">
+        <section class="popup popup_opened">
             <div class="popup__container">
-                <button type="button">Закрыть форму</button>
+                <button type="button" class="popup__close"></button>
                 <h3 class="popup__title">Редактировать профиль</h3>
                 <form class="popup__form" name="profile__info">
                     <label for="username-input" class="popup__label"></label>
-                    <input id="username-input" type="text" placeholder="Как вас зовут" class="popup__input">
+                    <input id="username-input" type="text" placeholder="Жак-Ив Кусто" class="popup__input">
                     <label for="about-input" class="popup__label"></label>
-                    <input id="about-input" type="text" placeholder="Несколько слов о вас" class="popup__input">
+                    <input id="about-input" type="text" placeholder="Исследователь океана" class="popup__input">
                     <button type="submit" class="popup__submit">Сохранить</button>
                 </form>
             </div>

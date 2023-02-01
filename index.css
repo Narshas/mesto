@@ -89,7 +89,7 @@ min-width: 320px; */
 
 .profile__edit-button {
     padding: 0;
-    margin: 5px 0 0 15px;
+    margin: 7px 0 0 18px;
     width: 24px;
     height: 24px;
     background-image: url(./images/edit-button-web.svg);
@@ -98,6 +98,7 @@ min-width: 320px; */
     border-style: none;
     background-repeat: no-repeat;
     background-position: 50%;
+    cursor: pointer;
 }
 
 .profile__add-button {
@@ -146,7 +147,7 @@ min-width: 320px; */
 
 
     .profile__edit-button {
-        margin: 4px 0 0 15px;
+        margin: 4px 0 0 10px;
         width: 18px;
         height: 18px;
         background: url(./images/edit-button-mobile.svg);
@@ -207,6 +208,7 @@ min-width: 320px; */
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    max-width: 190px;
 }
 
 .elements__like-button {
@@ -219,6 +221,7 @@ min-width: 320px; */
     width: 22px;
     height: 19px;
     right: 5px;
+    top: 1px;
     position: relative;
 
 }
@@ -227,9 +230,8 @@ min-width: 320px; */
 .popup {
     width: 100%;
     height: 100%;
-    display: flex;
     /* opacity: 0; */
-    visibility: hidden;
+    display: none;
     justify-content: center;
     align-items: center;
     position: fixed;
@@ -238,11 +240,17 @@ min-width: 320px; */
     background: rgba(0, 0, 0, 0.5);
 }
 
+.popup_opened {
+    display: flex;
+}
+
 .popup__container {
+    position: relative;
     max-width: 430px;
-    min-height: 330px;
+    max-height: 330px;
     padding: 34px 36px 37px;
     border-radius: 10px;
+    background-color: #fff;
 }
 
 @media screen and (max-width: 618px) {
@@ -255,13 +263,16 @@ min-width: 320px; */
 }
 
 .popup__close {
-    background: url(./images/close-Icon-web.svg);
-    position: absolute;
-    top: -8px;
-    right: -8px;
+    margin: 0;
+    padding: 0;
+    background-image: url(./images/close-Icon-web.svg);
     width: 32px;
     height: 32px;
     border: 0;
+    /* background-color: transparent; */
+    position: absolute;
+    top: -35px;
+    right: -35px;
 }
 
 .popup__close:hover {
@@ -308,27 +319,27 @@ min-width: 320px; */
 }
 
 .popup__label {
-    margin: 0 0 30px;
-}
-
-.popup__label:last-of-type {
-    margin: 0 0 48px;
-}
-
-
-@media screen and (max-width: 618px) {
-    .popup__label:last-of-type {
-        margin: 0 0 45px;
-    }
+    padding: 0;
 }
 
 .popup__input {
+    margin: 0 0 30px;
     padding: 0 0 13px;
     width: 100%;
     border: none;
     /* outline: none; */
     border-bottom: solid 1px rgba(0, 0, 0, 0.2);
     /* box-sizing: border-box; */
+}
+
+.popup__input:last-of-type {
+    margin: 0 0 48px;
+}
+
+@media screen and (max-width: 618px) {
+    .popup__input:last-of-type {
+        margin: 0 0 45px;
+    }
 }
 
 .popup__submit {
@@ -343,7 +354,7 @@ min-width: 320px; */
     /* box-sizing: border-box; */
     border-radius: 2px;
     border: none;
-    background-color: #000000;
+    background: #000000;
     color: #fff;
 
 }
