@@ -32,8 +32,6 @@ function handleFormSubmit(evt) {
     let who = document.querySelector('.profile__name');
     let what = document.querySelector('.profile__about');
     // Вставьте новые значения с помощью textContent
-    who.textContent = newWho;
-    what.textContent = newWhat;
 }
 
 // Прикрепляем обработчик к форме:
