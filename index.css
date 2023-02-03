@@ -34,12 +34,6 @@ min-width: 320px; */
     }
 }
 
-/* @media screen (min-width: 320px) {}
-
-} */
-
-/* Не задаем ограничение ширины для всей страницы, а только для отдельных блоков */
-
 /* ----- */
 .profile {
     margin: 0 0 51px;
@@ -71,11 +65,14 @@ min-width: 320px; */
 
 .profile__name {
     padding: 0;
-    margin: 0;
+    margin: 0 0 16px;
     max-width: 75%;
     font-weight: 500;
     font-size: 42px;
     line-height: 1.14;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .profile__about {
@@ -84,12 +81,15 @@ min-width: 320px; */
     font-weight: 400;
     font-size: 18px;
     line-height: 1.22;
-    width: 100%;
+    width: 90%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .profile__edit-button {
     padding: 0;
-    margin: 7px 0 0 18px;
+    margin: 0 0 9px 18px;
     width: 24px;
     height: 24px;
     background-image: url(./images/edit-button-web.svg);
@@ -99,6 +99,10 @@ min-width: 320px; */
     background-repeat: no-repeat;
     background-position: 50%;
     cursor: pointer;
+}
+
+.profile__edit-button:hover {
+    opacity: 0.6;
 }
 
 .profile__add-button {
@@ -112,6 +116,11 @@ min-width: 320px; */
     border-style: none;
     background-repeat: no-repeat;
     background-position: 50%;
+    cursor: pointer;
+}
+
+.profile__add-button:hover {
+    opacity: 0.6;
 }
 
 @media screen and (max-width: 618px) {
@@ -135,7 +144,7 @@ min-width: 320px; */
     }
 
     .profile__name {
-        margin: 0 10px 14px 0;
+        margin: 0 0 14px 0;
         text-align: center;
     }
 
@@ -147,7 +156,7 @@ min-width: 320px; */
 
 
     .profile__edit-button {
-        margin: 4px 0 0 10px;
+        margin: 0 0 0 10px;
         width: 18px;
         height: 18px;
         background: url(./images/edit-button-mobile.svg);
@@ -204,7 +213,7 @@ min-width: 320px; */
     padding: 0;
     font-weight: 900px;
     font-size: 24px;
-    line-height: 1.2;
+    line-height: 1.21;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -221,16 +230,20 @@ min-width: 320px; */
     width: 22px;
     height: 19px;
     right: 5px;
-    top: 1px;
+    top: 5px;
     position: relative;
+    cursor: pointer;
 
+}
+
+.elements__like-button:active {
+    background-image: url(./images/like-active.svg);
 }
 
 /* ----- */
 .popup {
     width: 100%;
     height: 100%;
-    /* opacity: 0; */
     display: none;
     justify-content: center;
     align-items: center;
