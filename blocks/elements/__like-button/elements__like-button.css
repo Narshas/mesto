@@ -3,15 +3,19 @@
     object-fit: cover;
     background-repeat: no-repeat;
     background-color: transparent;
-    border: solid 1px #000000;
     border-style: none;
     width: 22px;
     height: 19px;
     right: 5px;
-    top: 5px;
+    /* top: 5px; */
     position: relative;
     cursor: pointer;
+    padding: 0;
 
+}
+
+.elements__like-button:hover {
+    opacity: 0.5;
 }
 
 .elements__like-button:active {

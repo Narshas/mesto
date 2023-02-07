@@ -5,18 +5,19 @@
     height: 50px;
     background: url(../../../images/add-button-web.svg);
     background-color: transparent;
-    border: solid 1px #fff;
+    border: solid 2px #fff;
     border-style: none;
     background-repeat: no-repeat;
     background-position: 50%;
     cursor: pointer;
+    border-radius: 2px;
 }
 
 .profile__add-button:hover {
     opacity: 0.6;
 }
 
-@media screen and (max-width: 618px) {
+@media screen and (max-width: 640px) {
     .profile__add-button {
         width: 282px;
         background: url(../../../images/add-button-mobile.svg);
