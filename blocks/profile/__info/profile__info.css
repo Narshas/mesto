@@ -2,16 +2,19 @@
     display: flex;
     max-width: calc(100% - 300px);
     margin-right: auto;
-    align-items: center;
-    flex-wrap: wrap;
+    /* align-items: center;
+    flex-wrap: wrap; */
+    flex-direction: column;
 
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 680px) {
 
     .profile__info {
+        max-width: 100%;
         margin: 0 0 36px 0;
         justify-content: center;
         max-width: 100%;
+        flex-direction: column;
     }
 }
