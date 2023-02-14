@@ -104,6 +104,24 @@
             </form>
         </div>
     </div>
+    <!-- Начался попап добавления карточки -->
+    <div class="popup">
+        <div class="popup__container">
+            <button type="button" class="popup__close" aria-label="закрыть попап"></button>
+            <h3 class="popup__title">Редактировать профиль</h3>
+            <form class="popup__form" name="place">
+                <label for="place-name-input" class="popup__label"></label>
+                <input name="place-name-input" required id="place-name-input" type="text" class="popup__input"
+                    placeholder="Какое место хотите добавить?">
+                <label for="place-image-input" class="popup__label"></label>
+                <input name="place-image-input" required id="place-image-input" type="url" class="popup__input"
+                    placeholder="А сюда положите ссылку на фото оттуда">
+                <button type="submit" class="popup__submit" aria-label="Создать">Создать</button>
+            </form>
+        </div>
+    </div>
+    <!-- Зум картинки  -->
+
 
     <script src="./scripts/index.js"></script>
 </body>
