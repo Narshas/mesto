@@ -81,13 +81,13 @@ const getElement = (element) => {
     const newElementTitle = newElement.querySelector('.elements__title');
     const newElementImage = newElement.querySelector('.elements__image').src;
     newElementTitle.textContent = element.name;
-    newElementImage.src = element.link;
-
-    elementsList.append(newElement);
+    newElementImage.href = element.link;
+    // newElementImage.href = element.link;
+    return newElement;
 };
 
 const renderElement = (wrap, element) => {
-    wrap.append(getElement(element));
+    wrap.prepend(getElement(element));
 };
 
 defoltElements.forEach((element) => {
