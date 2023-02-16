@@ -1,47 +1,77 @@
-/* --- */
-let popup = document.querySelector('.popup');
+/* --Обработка попапа профиля-- */
+let popupProfile = document.querySelector('.popup_profile');
 let buttonOpen = document.querySelector('.profile__edit-button');
 
 let profileName = document.querySelector('.profile__name');
 let profileAbout = document.querySelector('.profile__about');
 
-let nameInput = popup.querySelector('#username-input');
-let jobInput = popup.querySelector('#about-input');
-let formElement = popup.querySelector('.popup__form');
-let buttonClose = document.querySelector('.popup__close');
+let nameInput = popupProfile.querySelector('#username-input');
+let jobInput = popupProfile.querySelector('#about-input');
+let formElement = popupProfile.querySelector('.popup__form_profile');
+let buttonClose = popupProfile.querySelector('.popup__close_profile');
 
-function popupClose() {
-    popup.classList.remove('popup_opened');
+function popupProfileClose() {
+    popupProfile.classList.remove('popup_opened');
 }
 
-buttonClose.addEventListener('click', popupClose);
+buttonClose.addEventListener('click', popupProfileClose);
 
-function popupEdit() {
-    popup.classList.add('popup_opened');
+function popupProfileEdit() {
+    popupProfile.classList.add('popup_opened');
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
 }
 
-buttonOpen.addEventListener('click', popupEdit);
+buttonOpen.addEventListener('click', popupProfileEdit);
 
 function handleFormSubmit(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileAbout.textContent = jobInput.value;
-    popupClose();
+    popupProfileClose();
 }
 
 formElement.addEventListener('submit', handleFormSubmit);
 
 /* --Обработка попапа места-- */
-// let popup = document.querySelector('.popup');
+const popupPlace = document.querySelector('.popup_place');
 const buttonAdd = document.querySelector('.profile__add-button');
+const buttonPlaceClose = popupPlace.querySelector('.popup__close_place');
+const formPlaceElement = popupPlace.querySelector('.popup__form_place');
 
-// let profileName = document.querySelector('.profile__name');
-// let profileAbout = document.querySelector('.profile__about');
+const placeNameInput = popupPlace.querySelector('#place-name-input');
+const placeImageInput = popupPlace.querySelector('#place-image-input');
 
-const placeNameInput = document.querySelector('.place-name-input');
-const placeImageInput = document.querySelector('.place-image-input');
+const newElementTitle = document.querySelector('.elements__title');
+const newElementImage = document.querySelector('.elements__image');
+
+const popupPlaceEdit = () => {
+    popupPlace.classList.add('popup_opened');
+};
+
+buttonAdd.addEventListener('click', popupPlaceEdit);
+
+const popupPlaceClose = () => {
+    popupPlace.classList.remove('popup_opened');
+};
+
+buttonPlaceClose.addEventListener('click', popupPlaceClose);
+
+const handlePlaceFormSubmit = (evt) => {
+    evt.preventDefault();
+    // newElementTitle.textContent = placeNameInput.value;
+    // newElementImage.src = placeImageInput.value;
+    let fieldForm = {
+        name: placeNameInput.value,
+        link: placeImageInput.value
+    };
+    renderElement(elementsList, fieldForm);
+    placeNameInput.value = '';
+    placeImageInput.value = '';
+    popupPlaceClose();
+}
+
+formPlaceElement.addEventListener('submit', handlePlaceFormSubmit);
 
 /* --Рендеринг карточек-- */
 const defoltElements = [
@@ -72,17 +102,16 @@ const defoltElements = [
 ];
 
 const elementsList = document.querySelector('.elements__list');
-// const form = document.querySelector('.') тут добавляем форму добавления мест
+const cardForm = document.querySelector('.popup__form_place');
 const cardTemplate = document.getElementById('user-card');
 
 const getElement = (element) => {
     const newElement = cardTemplate.content.cloneNode(true);
 
     const newElementTitle = newElement.querySelector('.elements__title');
-    const newElementImage = newElement.querySelector('.elements__image').src;
+    const newElementImage = newElement.querySelector('.elements__image');
     newElementTitle.textContent = element.name;
-    newElementImage.href = element.link;
-    // newElementImage.href = element.link;
+    newElementImage.src = element.link;
     return newElement;
 };
 
@@ -93,3 +122,15 @@ const renderElement = (wrap, element) => {
 defoltElements.forEach((element) => {
     renderElement(elementsList, element);
 });
+
+// cardForm.addEventListener('submit', (evt) => {
+//     evt.preventDefault();
+//     let fieldForm = {
+//         name: placeNameInput.value,
+//         link: placeImageInput.value
+//     };
+//     renderElement(elementsList, fieldForm);
+//     placeNameInput.value = '';
+//     placeImageInput.value = '';
+//     popupPlaceClose();
+// });
