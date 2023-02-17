@@ -134,3 +134,12 @@ defoltElements.forEach((element) => {
 //     placeImageInput.value = '';
 //     popupPlaceClose();
 // });
+
+/* --Кнопка-лайк-- */
+const buttonLike = document.querySelector('.elements__like-button');
+
+const buttonLikeToggle = (evt) => {
+    buttonLike.classList.toggle('elements__like-button_active');
+}
+
+buttonLike.addEventListener('click', buttonLikeToggle);
