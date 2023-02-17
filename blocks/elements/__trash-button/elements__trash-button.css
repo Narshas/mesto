@@ -1,5 +1,18 @@
-.elements {
-    margin: 0 auto;
-    max-width: 880px;
-    padding: 0 19px;
+.elements__trash-button {
+    background-image: url(../../../images/trash.svg);
+    width: 18px;
+    height: 19.3px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    border-style: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+.elements__trash-button:hover {
+    opacity: 0.6;
 }

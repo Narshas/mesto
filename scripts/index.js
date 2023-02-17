@@ -104,6 +104,18 @@ const defoltElements = [
 const elementsList = document.querySelector('.elements__list');
 const cardForm = document.querySelector('.popup__form_place');
 const cardTemplate = document.getElementById('user-card');
+const buttonLike = document.querySelector('.elements__like-button');
+//если убрать эту декларацию — функция likeToggle выдает ошибку
+
+const LikeToggle = (evt) => {
+    buttonLike.classList.toggle('.elements__like-button_active');
+};
+
+const cardDelete = (evt) => {
+    evt.target.closest('.elements__item').remove();
+};
+
+// тут ещё будет функция для зума
 
 const getElement = (element) => {
     const newElement = cardTemplate.content.cloneNode(true);
@@ -112,6 +124,16 @@ const getElement = (element) => {
     const newElementImage = newElement.querySelector('.elements__image');
     newElementTitle.textContent = element.name;
     newElementImage.src = element.link;
+
+    const buttonLike = newElement.querySelector('.elements__like-button');
+    const buttonDelete = newElement.querySelector('.elements__trash-button');
+    // const buttonZoom = newElement.querySelector
+    // ещё тут будет обработчик для зума-изображения
+
+    buttonDelete.addEventListener('click', cardDelete);
+    // buttonLike.addEventListener('click', LikeToggle);
+    // ещё тут будет обработчик для зума-изображения
+
     return newElement;
 };
 
@@ -136,10 +158,12 @@ defoltElements.forEach((element) => {
 // });
 
 /* --Кнопка-лайк-- */
-const buttonLike = document.querySelector('.elements__like-button');
 
-const buttonLikeToggle = (evt) => {
-    buttonLike.classList.toggle('elements__like-button_active');
-}
 
-buttonLike.addEventListener('click', buttonLikeToggle);
+
+
+/* --Удаление карточки-- */
+
+
+
+
