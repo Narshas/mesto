@@ -104,41 +104,54 @@ const defoltElements = [
 const elementsList = document.querySelector('.elements__list');
 const cardForm = document.querySelector('.popup__form_place');
 const cardTemplate = document.getElementById('user-card');
-const buttonLike = document.querySelector('.elements__like-button');
-//если убрать эту декларацию — функция likeToggle выдает ошибку
+const popupZoom = document.querySelector('.popup-zoom');
 
-const LikeToggle = (evt) => {
-    buttonLike.classList.toggle('.elements__like-button_active');
+const getElement = (fieldForm) => {
+    const newElement = cardTemplate.content.cloneNode(true);
+
+    const newElementTitle = newElement.querySelector('.elements__title');
+    const newElementImage = newElement.querySelector('.elements__image');
+    newElementTitle.textContent = fieldForm.name;
+    newElementImage.src = fieldForm.link;
+
+    const buttonLike = newElement.querySelector('.elements__like-button');
+    const buttonDelete = newElement.querySelector('.elements__trash-button');
+    const buttonZoom = newElement.querySelector('.elements__image');
+
+    buttonDelete.addEventListener('click', cardDelete);
+    buttonLike.addEventListener('click', likeToggle);
+    buttonZoom.addEventListener('click', imageZoom);
+
+    return newElement;
+};
+
+const popupZoomClose = () => {
+    popupZoom.classList.remove('popup-zoom_active');
+    popupZoom.classList.remove('popup_opened');
+}
+
+const renderElement = (wrap, fieldForm) => {
+    const cardElement = getElement(fieldForm);
+    wrap.prepend(cardElement);
+};
+
+const likeToggle = (evt) => {
+    evt.target.classList.toggle('elements__like-button_active');
 };
 
 const cardDelete = (evt) => {
     evt.target.closest('.elements__item').remove();
 };
 
-// тут ещё будет функция для зума
+const imageZoom = (evt) => {
+    const itCard = evt.target.closest('.elements__item');
+    popupZoom.querySelector('.popup-zoom__caption').textContent = itCard.querySelector('.elements__title').textContent;
+    popupZoom.querySelector('.popup-zoom__image').src = itCard.querySelector('.elements__image').src;
 
-const getElement = (element) => {
-    const newElement = cardTemplate.content.cloneNode(true);
+    popupZoom.querySelector('.popup__close').addEventListener('click', popupZoomClose);
 
-    const newElementTitle = newElement.querySelector('.elements__title');
-    const newElementImage = newElement.querySelector('.elements__image');
-    newElementTitle.textContent = element.name;
-    newElementImage.src = element.link;
-
-    const buttonLike = newElement.querySelector('.elements__like-button');
-    const buttonDelete = newElement.querySelector('.elements__trash-button');
-    // const buttonZoom = newElement.querySelector
-    // ещё тут будет обработчик для зума-изображения
-
-    buttonDelete.addEventListener('click', cardDelete);
-    // buttonLike.addEventListener('click', LikeToggle);
-    // ещё тут будет обработчик для зума-изображения
-
-    return newElement;
-};
-
-const renderElement = (wrap, element) => {
-    wrap.prepend(getElement(element));
+    popupZoom.classList.toggle('popup-zoom_active');
+    popupZoom.classList.toggle('popup_opened');
 };
 
 defoltElements.forEach((element) => {

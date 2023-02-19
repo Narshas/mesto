@@ -75,10 +75,15 @@
         </div>
     </div>
     <!-- Зум картинки  -->
-    <div class="popup popup_image-place">
-
+    <!-- class="popup" -->
+    <div class="popup popup-zoom">
+        <div class="popup-zoom__container">
+            <button class="popup__close popup-zoom__close"></button>
+            <img src="" alt="" class="popup-zoom__image">
+            <p class="popup-zoom__caption"></p>
+        </div>
     </div>
-    <!-- шаблон пользовательской карточки -->
+    <!-- шаблон карточки -->
     <template id='user-card'>
         <li class="elements__item">
             <button type="button" class="elements__trash-button" aria-label="удалить карточку места"></button>
