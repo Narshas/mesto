@@ -127,7 +127,7 @@ const getElement = (fieldForm) => {
 
 const popupZoomClose = () => {
     popupZoom.classList.remove('popup-zoom_active');
-    popupZoom.classList.remove('popup_opened');
+    // popupZoom.classList.remove('popup_opened');
 }
 
 const renderElement = (wrap, fieldForm) => {
@@ -151,7 +151,7 @@ const imageZoom = (evt) => {
     popupZoom.querySelector('.popup__close').addEventListener('click', popupZoomClose);
 
     popupZoom.classList.toggle('popup-zoom_active');
-    popupZoom.classList.toggle('popup_opened');
+    // popupZoom.classList.toggle('popup_opened');
 };
 
 defoltElements.forEach((element) => {
