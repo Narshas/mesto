@@ -59,8 +59,6 @@ buttonPlaceClose.addEventListener('click', popupPlaceClose);
 
 const handlePlaceFormSubmit = (evt) => {
     evt.preventDefault();
-    // newElementTitle.textContent = placeNameInput.value;
-    // newElementImage.src = placeImageInput.value;
     let fieldForm = {
         name: placeNameInput.value,
         link: placeImageInput.value
@@ -127,7 +125,6 @@ const getElement = (fieldForm) => {
 
 const popupZoomClose = () => {
     popupZoom.classList.remove('popup-zoom_active');
-    // popupZoom.classList.remove('popup_opened');
 }
 
 const renderElement = (wrap, fieldForm) => {
@@ -151,31 +148,11 @@ const imageZoom = (evt) => {
     popupZoom.querySelector('.popup__close').addEventListener('click', popupZoomClose);
 
     popupZoom.classList.toggle('popup-zoom_active');
-    // popupZoom.classList.toggle('popup_opened');
 };
 
 defoltElements.forEach((element) => {
     renderElement(elementsList, element);
 });
-
-// cardForm.addEventListener('submit', (evt) => {
-//     evt.preventDefault();
-//     let fieldForm = {
-//         name: placeNameInput.value,
-//         link: placeImageInput.value
-//     };
-//     renderElement(elementsList, fieldForm);
-//     placeNameInput.value = '';
-//     placeImageInput.value = '';
-//     popupPlaceClose();
-// });
-
-/* --Кнопка-лайк-- */
-
-
-
-
-/* --Удаление карточки-- */
 
 
 
