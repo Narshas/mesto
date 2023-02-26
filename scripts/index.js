@@ -1,23 +1,23 @@
 /* --Обработка попапа профиля-- */
-let popupProfile = document.querySelector('.popup_profile');
-let buttonOpen = document.querySelector('.profile__edit-button');
+const popupProfile = document.querySelector('.popup_profile');
+const buttonOpen = document.querySelector('.profile__edit-button');
 
-let profileName = document.querySelector('.profile__name');
-let profileAbout = document.querySelector('.profile__about');
+const profileName = document.querySelector('.profile__name');
+const profileAbout = document.querySelector('.profile__about');
 
-let nameInput = popupProfile.querySelector('#username-input');
-let jobInput = popupProfile.querySelector('#about-input');
-let formElement = popupProfile.querySelector('.popup__form_profile');
-let buttonClose = popupProfile.querySelector('.popup__close_profile');
+const nameInput = popupProfile.querySelector('#username-input');
+const jobInput = popupProfile.querySelector('#about-input');
+const formElement = popupProfile.querySelector('.popup__form_profile');
+const buttonClose = popupProfile.querySelector('.popup__close_profile');
 
 function popupProfileClose() {
-    popupProfile.classList.remove('popup_opened');
+    popupProfile.classList.remove('popup_active_form');
 }
 
 buttonClose.addEventListener('click', popupProfileClose);
 
 function popupProfileEdit() {
-    popupProfile.classList.add('popup_opened');
+    popupProfile.classList.add('popup_active_form');
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
 }
@@ -46,13 +46,13 @@ const newElementTitle = document.querySelector('.elements__title');
 const newElementImage = document.querySelector('.elements__image');
 
 const popupPlaceEdit = () => {
-    popupPlace.classList.add('popup_opened');
+    popupPlace.classList.add('popup_active_form');
 };
 
 buttonAdd.addEventListener('click', popupPlaceEdit);
 
 const popupPlaceClose = () => {
-    popupPlace.classList.remove('popup_opened');
+    popupPlace.classList.remove('popup_active_form');
 };
 
 buttonPlaceClose.addEventListener('click', popupPlaceClose);
@@ -102,7 +102,7 @@ const defoltElements = [
 const elementsList = document.querySelector('.elements__list');
 const cardForm = document.querySelector('.popup__form_place');
 const cardTemplate = document.getElementById('user-card');
-const popupZoom = document.querySelector('.popup-zoom');
+const popupZoom = document.querySelector('.popup_zoom');
 
 const getElement = (fieldForm) => {
     const newElement = cardTemplate.content.cloneNode(true);
@@ -124,7 +124,7 @@ const getElement = (fieldForm) => {
 };
 
 const popupZoomClose = () => {
-    popupZoom.classList.remove('popup-zoom_active');
+    popupZoom.classList.remove('popup_active_zoom');
 }
 
 const renderElement = (wrap, fieldForm) => {
@@ -142,12 +142,12 @@ const cardDelete = (evt) => {
 
 const imageZoom = (evt) => {
     const itCard = evt.target.closest('.elements__item');
-    popupZoom.querySelector('.popup-zoom__caption').textContent = itCard.querySelector('.elements__title').textContent;
-    popupZoom.querySelector('.popup-zoom__image').src = itCard.querySelector('.elements__image').src;
+    popupZoom.querySelector('.popup__caption').textContent = itCard.querySelector('.elements__title').textContent;
+    popupZoom.querySelector('.popup__image').src = itCard.querySelector('.elements__image').src;
 
-    popupZoom.querySelector('.popup__close').addEventListener('click', popupZoomClose);
+    popupZoom.querySelector('.popup__close_zoom').addEventListener('click', popupZoomClose);
 
-    popupZoom.classList.toggle('popup-zoom_active');
+    popupZoom.classList.toggle('popup_active_zoom');
 };
 
 defoltElements.forEach((element) => {

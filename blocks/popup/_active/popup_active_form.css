@@ -1,5 +1,6 @@
-.popup_opened {
+.popup_active_form {
     display: flex;
     opacity: 1;
     visibility: visible;
+    background: rgba(0, 0, 0, 0.5);
 }

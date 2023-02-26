@@ -1,4 +1,4 @@
-.popup-zoom__container {
+.popup__zoom-container {
     position: relative;
     display: flex;
     flex-direction: column;
