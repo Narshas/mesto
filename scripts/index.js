@@ -10,27 +10,29 @@ const jobInput = popupProfile.querySelector('#about-input');
 const formElement = popupProfile.querySelector('.popup__form_profile');
 const buttonClose = popupProfile.querySelector('.popup__close_profile');
 
-function popupProfileClose() {
-    popupProfile.classList.remove('popup_active_form');
-}
-
-buttonClose.addEventListener('click', popupProfileClose);
-
-function popupProfileEdit() {
-    popupProfile.classList.add('popup_active_form');
+function EditPopupProfile() {
+    OpenPopup(popupProfile);
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
 }
 
-buttonOpen.addEventListener('click', popupProfileEdit);
+function OpenPopup(popup) {
+    popup.classList.add('popup_active');
+}
+
+function ClosePopup(popup) {
+    popup.classList.remove('popup_active');
+}
 
 function handleFormSubmit(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileAbout.textContent = jobInput.value;
-    popupProfileClose();
+    ClosePopup(popupProfile);
 }
 
+buttonClose.addEventListener('click', ClosePopup(popupProfile));
+buttonOpen.addEventListener('click', EditPopupProfile);
 formElement.addEventListener('submit', handleFormSubmit);
 
 /* --Обработка попапа места-- */
@@ -45,17 +47,9 @@ const placeImageInput = popupPlace.querySelector('#place-image-input');
 const newElementTitle = document.querySelector('.elements__title');
 const newElementImage = document.querySelector('.elements__image');
 
-const popupPlaceEdit = () => {
-    popupPlace.classList.add('popup_active_form');
-};
+buttonAdd.addEventListener('click', OpenPopup(popupPlace));
 
-buttonAdd.addEventListener('click', popupPlaceEdit);
-
-const popupPlaceClose = () => {
-    popupPlace.classList.remove('popup_active_form');
-};
-
-buttonPlaceClose.addEventListener('click', popupPlaceClose);
+buttonPlaceClose.addEventListener('click', ClosePopup(popupPlace));
 
 const handlePlaceFormSubmit = (evt) => {
     evt.preventDefault();
@@ -66,7 +60,7 @@ const handlePlaceFormSubmit = (evt) => {
     renderElement(elementsList, fieldForm);
     placeNameInput.value = '';
     placeImageInput.value = '';
-    popupPlaceClose();
+    ClosePopup(popupPlace);
 }
 
 formPlaceElement.addEventListener('submit', handlePlaceFormSubmit);
@@ -123,10 +117,6 @@ const getElement = (fieldForm) => {
     return newElement;
 };
 
-const popupZoomClose = () => {
-    popupZoom.classList.remove('popup_active_zoom');
-}
-
 const renderElement = (wrap, fieldForm) => {
     const cardElement = getElement(fieldForm);
     wrap.prepend(cardElement);
@@ -145,9 +135,9 @@ const imageZoom = (evt) => {
     popupZoom.querySelector('.popup__caption').textContent = itCard.querySelector('.elements__title').textContent;
     popupZoom.querySelector('.popup__image').src = itCard.querySelector('.elements__image').src;
 
-    popupZoom.querySelector('.popup__close_zoom').addEventListener('click', popupZoomClose);
+    popupZoom.querySelector('.popup__close_zoom').addEventListener('click', ClosePopup(popupZoom));
 
-    popupZoom.classList.toggle('popup_active_zoom');
+    OpenPopup(popupZoom);
 };
 
 defoltElements.forEach((element) => {
