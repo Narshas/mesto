@@ -10,17 +10,19 @@ const jobInput = popupProfile.querySelector('#about-input');
 const formElement = popupProfile.querySelector('.popup__form_profile');
 const buttonClose = popupProfile.querySelector('.popup__close_profile');
 
-function EditPopupProfile() {
-    OpenPopup(popupProfile);
+function editPopupProfile() {
+
+    openPopup(popupProfile);
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
 }
 
-function OpenPopup(popup) {
+function openPopup(popup) {
     popup.classList.add('popup_active');
+    console.log('вызвалась функция закрытия');
 }
 
-function ClosePopup(popup) {
+function closePopup(popup) {
     popup.classList.remove('popup_active');
 }
 
@@ -28,11 +30,13 @@ function handleFormSubmit(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileAbout.textContent = jobInput.value;
-    ClosePopup(popupProfile);
+    closePopup(popupProfile);
 }
 
-buttonClose.addEventListener('click', ClosePopup(popupProfile));
-buttonOpen.addEventListener('click', EditPopupProfile);
+buttonClose.addEventListener('click', () => {
+    closePopup(popupProfile)
+});
+buttonOpen.addEventListener('click', editPopupProfile);
 formElement.addEventListener('submit', handleFormSubmit);
 
 /* --Обработка попапа места-- */
@@ -47,20 +51,23 @@ const placeImageInput = popupPlace.querySelector('#place-image-input');
 const newElementTitle = document.querySelector('.elements__title');
 const newElementImage = document.querySelector('.elements__image');
 
-buttonAdd.addEventListener('click', OpenPopup(popupPlace));
-
-buttonPlaceClose.addEventListener('click', ClosePopup(popupPlace));
+buttonAdd.addEventListener('click', () => {
+    openPopup(popupPlace)
+});
+buttonPlaceClose.addEventListener('click', () => {
+    closePopup(popupPlace)
+});
 
 const handlePlaceFormSubmit = (evt) => {
     evt.preventDefault();
-    let fieldForm = {
+    const fieldForm = {
         name: placeNameInput.value,
         link: placeImageInput.value
     };
     renderElement(elementsList, fieldForm);
     placeNameInput.value = '';
     placeImageInput.value = '';
-    ClosePopup(popupPlace);
+    closePopup(popupPlace);
 }
 
 formPlaceElement.addEventListener('submit', handlePlaceFormSubmit);
@@ -97,6 +104,8 @@ const elementsList = document.querySelector('.elements__list');
 const cardForm = document.querySelector('.popup__form_place');
 const cardTemplate = document.getElementById('user-card');
 const popupZoom = document.querySelector('.popup_zoom');
+const popupImage = popupZoom.querySelector('.popup__image');
+const popupCaption = popupZoom.querySelector('.popup__caption');
 
 const getElement = (fieldForm) => {
     const newElement = cardTemplate.content.cloneNode(true);
@@ -105,6 +114,7 @@ const getElement = (fieldForm) => {
     const newElementImage = newElement.querySelector('.elements__image');
     newElementTitle.textContent = fieldForm.name;
     newElementImage.src = fieldForm.link;
+    newElementImage.alt = fieldForm.name;
 
     const buttonLike = newElement.querySelector('.elements__like-button');
     const buttonDelete = newElement.querySelector('.elements__trash-button');
@@ -132,13 +142,16 @@ const cardDelete = (evt) => {
 
 const imageZoom = (evt) => {
     const itCard = evt.target.closest('.elements__item');
-    popupZoom.querySelector('.popup__caption').textContent = itCard.querySelector('.elements__title').textContent;
-    popupZoom.querySelector('.popup__image').src = itCard.querySelector('.elements__image').src;
+    popupCaption.textContent = itCard.querySelector('.elements__title').textContent;
+    popupImage.src = itCard.querySelector('.elements__image').src;
+    popupImage.alt = itCard.querySelector('.elements__title').textContent;
 
-    popupZoom.querySelector('.popup__close_zoom').addEventListener('click', ClosePopup(popupZoom));
-
-    OpenPopup(popupZoom);
+    openPopup(popupZoom);
 };
+
+popupZoom.querySelector('.popup__close_zoom').addEventListener('click', () => {
+    closePopup(popupZoom)
+});
 
 defoltElements.forEach((element) => {
     renderElement(elementsList, element);
