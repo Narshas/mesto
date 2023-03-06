@@ -19,19 +19,12 @@ function editPopupProfile() {
 
 function openPopup(popup) {
     popup.classList.add('popup_active');
+    console.log('вызвалась функция закрытия');
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_active');
 }
-
-const closePopupOverlay = (event) => {
-    if (event.target === event.currentTarget) {
-        closePopup(event.currentTarget);
-    }
-};
-
-popupProfile.addEventListener('click', closePopupOverlay);
 
 function handleFormSubmit(evt) {
     evt.preventDefault();
@@ -64,8 +57,6 @@ buttonAdd.addEventListener('click', () => {
 buttonPlaceClose.addEventListener('click', () => {
     closePopup(popupPlace)
 });
-
-popupPlace.addEventListener('click', closePopupOverlay);
 
 const handlePlaceFormSubmit = (evt) => {
     evt.preventDefault();
@@ -161,8 +152,6 @@ const imageZoom = (evt) => {
 popupZoom.querySelector('.popup__close_zoom').addEventListener('click', () => {
     closePopup(popupZoom)
 });
-
-popupZoom.addEventListener('click', closePopupOverlay);
 
 defoltElements.forEach((element) => {
     renderElement(elementsList, element);
