@@ -19,10 +19,19 @@ function editPopupProfile() {
 
 function openPopup(popup) {
     popup.classList.add('popup_active');
+
+    function handleEsc(evt) {
+        if (evt.key === 'Escape') {
+            closePopup(popup);
+        }
+    }
+
+    document.addEventListener('keyup', handleEsc);
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_active');
+    document.removeEventListener('keyup', handleEsc);
 }
 
 const closePopupOverlay = (event) => {
