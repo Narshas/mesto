@@ -44,3 +44,41 @@
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+
+.popup__input-error {
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
+    font-weight: 400;
+    opacity: 0;
+    transition: opacity 0.3s;
+
+    /* position: absolute;
+    top: calc(100% + 5px);
+    left: 0; */
+    /* position: absolute;
+    width: 164px;
+    height: 12px;
+    left: 110px;
+    top: 500px;*/
+}
+
+.popup__input-error_active {
+    opacity: 1;
+}
+
+.popup__input_invalid {
+    border-bottom: solid 1px rgba(255, 0, 0);
+    /* outline: none; */
+}
+
+.popup__submit_inactive {
+    opacity: 0.2;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: #EDEDED;
+    /* color: #B8B8B8; */
+}

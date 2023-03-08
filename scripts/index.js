@@ -177,6 +177,41 @@ defoltElements.forEach((element) => {
     renderElement(elementsList, element);
 });
 
+/* ------------- Валидация ------------- */
+/* ------------- Валидация ------------- */
+/* ------------- Валидация ------------- */
+/* ------------- Валидация ------------- */
+
+const options = {
+    submitSelector: '.popup__submit',
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    inputSectionSelector: '.popup__form-section',
+    inputErrorSelector: 'popup__input-error',
+    inputErrorClass: 'popup__input-error_active',
+    inputInvalidClass: 'popup__input_invalid',
+    disabledButtonClass: 'popup__submit_inactive',
+};
+
+enableValidation(options);
+
+// /логика очищения полей уже есть — надо перенести ресет туда
+
+const formProfile = document.forms.profile__info;
+
+formProfile.addEventListener('submit', (e) => {
+    e.preventDefault();
+    formProfile.reset();
+});
+
+resetButton.addEventListeners('click', () => {
+    const inputs = Array.from(formProfile.querySelectorAll('.form__input'));
+    inputs.forEach(input => {
+        hiddenErrorForInput(input);
+    });
+});
 
 
 
+// повторить для второй формы
+// place
