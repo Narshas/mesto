@@ -45,23 +45,19 @@
         <div class="popup__container">
             <button type="button" class="popup__close popup__close_profile" aria-label="закрыть попап"></button>
             <h3 class="popup__title popup__title_profile">Редактировать профиль</h3>
-            <!-- novalidate -->
-            <form class="popup__form popup__form_profile" name="profile__info">
-                <div class="popup__form-section">
-                    <label for="username-input" class="popup__label"></label>
-                    <input name="profile-text" id="username-input" type="text" minlength="2" maxlength="40"
-                        class="popup__input popup__input_profile" required>
-                    <span class="popup__input-error" id="username-input-error">В этом поле
-                        ошибка</span>
-                </div>
-                <div class="popup__form-section">
-                    <label for="about-input" class="popup__label"></label>
-                    <input name="profile-text" id="about-input" type="text" minlength="2" maxlength="400"
-                        class="popup__input popup__input_profile" required>
-                    <span class="popup__input-error" id="about-input-error">В этом поле ошибка</span>
-                </div>
-                <button type="submit" class="popup__submit popup__submit_profile"
-                    aria-label="Сохранить">Сохранить</button>
+            <form class="popup__form popup__form_profile" name="profile__info" novalidate>
+                <label for="username-input" class="popup__label"></label>
+                <input name="profile-text" id="username-input" type="text" minlength="2" maxlength="40"
+                    class="popup__input popup__input_profile" required>
+                <span class="popup__input-error popup__input-error_username-input" id="username-input-error">В этом поле
+                    ошибка</span>
+                <label for="about-input" class="popup__label"></label>
+                <input name="profile-text" id="about-input" type="text" minlength="2" maxlength="400"
+                    class="popup__input popup__input_profile" required>
+                <span class="popup__input-error popup__input-error_about-input" id="about-input-error">В этом поле
+                    ошибка</span>
+                <button type="submit" class="popup__submit popup__submit_profile" aria-label="Сохранить"
+                    disabled>Сохранить</button>
             </form>
         </div>
     </div>
@@ -70,20 +66,17 @@
         <div class="popup__container">
             <button type="button" class="popup__close popup__close_place" aria-label="закрыть попап"></button>
             <h3 class="popup__title">Новое место</h3>
-            <!-- novalidate -->
-            <form class="popup__form popup__form_place" name="place">
-                <div class="popup__form-section">
-                    <label for="place-name-input" class="popup__label"></label>
-                    <input name="place-text" required id="place-name-input" type="text" minlength="2" maxlength="30"
-                        class="popup__input popup__input_place" placeholder="Какое место хотите добавить?">
-                    <span class="popup__input-error" id="place-name-input-error">В этом поле ошибка</span>
-                </div>
-                <div class="popup__form-section">
-                    <label for="place-image-input" class="popup__label"></label>
-                    <input name="place-url" required id="place-image-input" type="url"
-                        class="popup__input popup__input_place" placeholder="Есть ссылка на фото оттуда?">
-                    <span class="popup__input-error" id="place-image-input-error">В этом поле ошибка</span>
-                </div>
+            <form class="popup__form popup__form_place" name="place" novalidate>
+                <label for="place-name-input" class="popup__label"></label>
+                <input name="place-text" required id="place-name-input" type="text" minlength="2" maxlength="30"
+                    class="popup__input popup__input_place" placeholder="Какое место хотите добавить?">
+                <span class="popup__input-error popup__input-error_place-name-input" id="place-name-input-error">В этом
+                    поле ошибка</span>
+                <label for="place-image-input" class="popup__label"></label>
+                <input name="place-url" required id="place-image-input" type="url"
+                    class="popup__input popup__input_place" placeholder="Есть ссылка на фото оттуда?">
+                <span class="popup__input-error popup__input-error_place-image-input" id="place-image-input-error">В
+                    этом поле ошибка</span>
                 <button type="submit" class="popup__submit popup__submit_place" aria-label="Создать">Создать</button>
             </form>
         </div>

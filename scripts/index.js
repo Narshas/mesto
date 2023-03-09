@@ -182,36 +182,41 @@ defoltElements.forEach((element) => {
 /* ------------- Валидация ------------- */
 /* ------------- Валидация ------------- */
 
-const options = {
-    submitSelector: '.popup__submit',
+const validationOptions = {
     formSelector: '.popup__form',
+    submitSelector: '.popup__submit',
     inputSelector: '.popup__input',
-    inputSectionSelector: '.popup__form-section',
-    inputErrorSelector: 'popup__input-error',
-    inputErrorClass: 'popup__input-error_active',
-    inputInvalidClass: 'popup__input_invalid',
     disabledButtonClass: 'popup__submit_inactive',
+    inputInvalidClass: 'popup__input_invalid',
+    inputErrorSelector: '.popup__input-error',
+    // inputSectionSelector: '.popup__form-section',
+    inputErrorClass: 'popup__input-error_active',
+
+
 };
 
-enableValidation(options);
+enableValidation(validationOptions);
 
-// /логика очищения полей уже есть — надо перенести ресет туда
+// const formSignIn = document.forms.signIn;
+// const resetButton = formSignIn.querySelector('.form__reset');
+// const submitButton = formSignIn.querySelector('.form__submit');
 
-const formProfile = document.forms.profile__info;
+// formSignIn.addEventListener('submit', (e) => {
+//   e.preventDefault();
+//   console.log(formSignIn);
+//   formSignIn.reset();
+//   disableButton(submitButton, validationOptions.disabledButtonClass);
+// });
 
-formProfile.addEventListener('submit', (e) => {
-    e.preventDefault();
-    formProfile.reset();
-});
-
-resetButton.addEventListeners('click', () => {
-    const inputs = Array.from(formProfile.querySelectorAll('.form__input'));
-    inputs.forEach(input => {
-        hiddenErrorForInput(input);
-    });
-});
-
-
-
-// повторить для второй формы
-// place
+// resetButton.addEventListener('click', () => {
+//   const inputs = Array.from(formSignIn.querySelectorAll('.form__input'));
+//   /**
+//    * Комментарий №3 (Последний)
+//    * Вместо функции hiddenErrorForInput теперь вызывается setInputState
+//    * с нужным состоянием для инпута (валидное или невалидное)
+//    */
+//   inputs.forEach(input => {
+//     setInputState(input, true, validationOptions);
+//   });
+//   disableButton(submitButton, validationOptions.disabledButtonClass);
+// });
