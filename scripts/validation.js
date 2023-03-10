@@ -88,7 +88,7 @@ const cleanInputError = (formElement, validationOptions) => {
 
 const cleanValidation = (formElement, validationOptions) => {
     cleanInputError(formElement, validationOptions);
-    toggleButton(formElement, validationOptions);
+    toggleButtonState(formElement, validationOptions);
     // console.log(form);
 };
 
