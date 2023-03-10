@@ -79,13 +79,18 @@ const setEventListeners = (form, validationOptions) => {
     // toggleButtonState(inputs, submitElement, validationOptions.disabledButtonClass);
 };
 
-// const resetInputError = (formElement, validationOptions) => {
-reset
-// }
+const cleanInputError = (formElement, validationOptions) => {
+    const inputs = Array.from(formElement.querySelectorAll(validationOptions.inputSelector));
+    inputs.forEach(inputElement => {
+        hideError(formElement, inputElement, validationOptions)
+    });
+};
 
-// const resetValidation = () => {
-//     resetInputError();
-// }
+const cleanValidation = (formElement, validationOptions) => {
+    cleanInputError(formElement, validationOptions);
+    toggleButton(formElement, validationOptions);
+    // console.log(form);
+};
 
 const enableValidation = (validationOptions) => {
     const forms = Array.from(document.querySelectorAll(validationOptions.formSelector));

@@ -42,63 +42,10 @@
 @import url(../blocks/popup/_zoom/popup_zoom.css);
 @import url(../blocks/popup/__image/popup__image.css);
 
+@import url(../blocks/popup/__input-error/popup__input-error.css);
+@import url(../blocks/popup/__input-error/_active/popup__input-error_active.css);
+@import url(../blocks/popup/__input/_invalid/popup__input_invalid.css);
+@import url(../blocks/popup/__submit/_inactive/popup__submit_inactive.css);
+
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
-
-.popup__input-error {
-    font-size: 12px;
-    line-height: 1;
-    /* по заданию 1.25/15px, но фактически в макете заверстано 1.0/12px — 
-    подробности читать здесь https://app.pachca.com/chats?thread_id=329327 */
-    color: #FF0000;
-    font-weight: 400;
-
-    margin: 5px 0 0;
-    padding: 0;
-    min-height: 25px;
-    display: flex;
-
-    opacity: 0;
-    transition: opacity 0.3s;
-
-    /* position: absolute;
-    top: calc(100% + 5px);
-    left: 0; */
-    /* position: absolute;
-    width: 164px;
-    height: 12px;
-    left: 110px;
-    top: 500px;*/
-}
-
-.popup__input-error:last-of-type {
-    margin: 5px 0 19px;
-}
-
-@media screen and (max-width: 618px) {
-    .popup__input-error:last-of-type {
-        margin: 0 0 16px;
-    }
-}
-
-.popup__input-error_active {
-    opacity: 1;
-}
-
-.popup__input_invalid {
-    border-bottom: solid 1px rgba(255, 0, 0);
-    /* outline: none; */
-}
-
-.popup__submit_inactive {
-    opacity: 0.2;
-    pointer-events: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-color: #fff;
-    color: #000000;
-    border: 1px solid #000000;
-    border-radius: 2px;
-}

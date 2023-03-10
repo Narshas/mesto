@@ -15,6 +15,7 @@ function editPopupProfile() {
     openPopup(popupProfile);
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
+    cleanValidation(formElement, validationOptions);
 }
 
 function openPopup(popup) {
@@ -32,6 +33,8 @@ function openPopup(popup) {
 function closePopup(popup) {
     popup.classList.remove('popup_active');
     document.removeEventListener('keyup', handleEsc);
+    const currentForm = popup.querrySelector('.popup__form');
+    currentForm.reset();
 }
 
 const closePopupOverlay = (event) => {
@@ -68,7 +71,9 @@ const newElementTitle = document.querySelector('.elements__title');
 const newElementImage = document.querySelector('.elements__image');
 
 buttonAdd.addEventListener('click', () => {
-    openPopup(popupPlace)
+    openPopup(popupPlace);
+    cleanValidation(formPlaceElement, validationOptions);
+    formPlaceElement.reset();
 });
 buttonPlaceClose.addEventListener('click', () => {
     closePopup(popupPlace)
