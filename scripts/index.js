@@ -70,9 +70,10 @@ function editPopupProfile() {
     cleanValidation(formElement, validationOptions);
 }
 
-function handleEsc(evt, popup) {
+function handleEsc(evt) {
     if (evt.key === 'Escape') {
-        closePopup(popup);
+        const openedPopup = document.querySelector('.popup_active');
+        closePopup(openedPopup);
     }
 };
 
@@ -83,14 +84,12 @@ function openPopup(popup) {
     //         closePopup(popup);
     //     }
     // }
-    document.addEventListener('keyup', (evt) =>
-        handleEsc(evt, popup));
+    document.addEventListener('keyup', handleEsc);
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_active');
-    document.removeEventListener('keyup', (evt) =>
-        handleEsc(evt, popup));
+    document.removeEventListener('keyup', handleEsc);
     // const currentForm = popup.querrySelector('.popup__form');
     // currentForm.reset();
 }
