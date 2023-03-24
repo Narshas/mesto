@@ -1,4 +1,4 @@
-class FormValidator {
+export class FormValidator {
     constructor(validationOptions, popup) {
         this._validationOptions = validationOptions;
         this._form = popup.querySelector('.popup__form');
@@ -80,5 +80,3 @@ class FormValidator {
         this._setEventListeners();
     }
 }
-
-export { FormValidator };

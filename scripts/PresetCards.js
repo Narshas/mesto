@@ -1,4 +1,4 @@
-const defoltElements = [
+export const defoltElements = [
     {
         name: 'Архыз',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -24,6 +24,4 @@ const defoltElements = [
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
-
-export { defoltElements };
 

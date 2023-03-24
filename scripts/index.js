@@ -1,6 +1,6 @@
-import { defoltElements } from './PresetCards.js';
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
+import { defoltElements } from './PresetCards';
+import { Card } from './Card';
+import { FormValidator } from './FormValidator';
 
 /* -- DOM профиля -- */
 const popupProfile = document.querySelector('.popup_profile');
@@ -23,7 +23,7 @@ const newElementImage = document.querySelector('.elements__image');
 
 const elementsList = document.querySelector('.elements__list');
 const cardForm = document.querySelector('.popup__form_place');
-const cardTemplate = document.getElementById('user-card');
+const cardTemplate = document.querySelector('#user-card');
 const popupZoom = document.querySelector('.popup_zoom');
 const popupImage = popupZoom.querySelector('.popup__image');
 const popupCaption = popupZoom.querySelector('.popup__caption');
@@ -60,6 +60,13 @@ function editPopupProfile() {
     validationProfile.cleanValidation();
 }
 
+function handleFormSubmit(evt) {
+    evt.preventDefault();
+    profileName.textContent = nameInput.value;
+    profileAbout.textContent = jobInput.value;
+    closePopup(popupProfile);
+}
+
 const imageZoom = (evt) => {
     const itCard = evt.target.closest('.elements__item');
     popupCaption.textContent = itCard.querySelector('.elements__title').textContent;
@@ -68,37 +75,20 @@ const imageZoom = (evt) => {
     openPopup(popupZoom);
 };
 
-/* -- Обработчики профиля -- */
+/* --Рендеринг карточек-- */
+
+const renderElement = (wrap, fieldForm, cardTemplate) => {
+    const cardElement = new Card(fieldForm, cardTemplate, imageZoom);
+    wrap.prepend(cardElement.generateElement());
+};
 
 
-
-
-
-function handleFormSubmit(evt) {
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileAbout.textContent = jobInput.value;
-    closePopup(popupProfile);
-}
-
-
-
-/* --Обработчики места-- */
-
-const handlePlaceFormSubmit = (evt) => {
-    evt.preventDefault();
-    const fieldForm = {
-        name: placeNameInput.value,
-        link: placeImageInput.value
-    };
-    renderElement(elementsList, fieldForm);
-    placeNameInput.value = '';
-    placeImageInput.value = '';
-    closePopup(popupPlace);
-}
-
+defoltElements.forEach((element) => {
+    renderElement(elementsList, element, cardTemplate);
+});
 
 /* ---- */
+
 buttonOpen.addEventListener('click', editPopupProfile);
 
 formElement.addEventListener('submit', handleFormSubmit);
@@ -127,38 +117,17 @@ buttonPlaceClose.addEventListener('click', () => {
     closePopup(popupPlace)
 });
 
-/* --Рендеринг карточек-- */
-
-// const getElement = (fieldForm) => {
-//     const newElement = cardTemplate.content.cloneNode(true);
-
-//     const newElementTitle = newElement.querySelector('.elements__title');
-//     const newElementImage = newElement.querySelector('.elements__image');
-//     newElementTitle.textContent = fieldForm.name;
-//     newElementImage.src = fieldForm.link;
-//     newElementImage.alt = fieldForm.name;
-
-//     const buttonLike = newElement.querySelector('.elements__like-button');
-//     const buttonDelete = newElement.querySelector('.elements__trash-button');
-//     const buttonZoom = newElement.querySelector('.elements__image');
-
-//     buttonDelete.addEventListener('click', cardDelete);
-//     buttonLike.addEventListener('click', likeToggle);
-//     buttonZoom.addEventListener('click', imageZoom);
-
-//     return newElement;
-// };
-
-const renderElement = (wrap, fieldForm) => {
-    const cardElement = getElement();
-    wrap.prepend(cardElement);
-};
-
-
-defoltElements.forEach((element) => {
-    renderElement(elementsList, element);
-});
-
+const handlePlaceFormSubmit = (evt) => {
+    evt.preventDefault();
+    const fieldForm = {
+        name: placeNameInput.value,
+        link: placeImageInput.value
+    };
+    renderElement(elementsList, fieldForm, cardTemplate);
+    placeNameInput.value = '';
+    placeImageInput.value = '';
+    closePopup(popupPlace);
+}
 /* ------------- Валидация ------------- */
 
 const validationOptions = {
@@ -174,4 +143,5 @@ const validationOptions = {
 const validationProfile = new FormValidator(validationOptions, popupProfile);
 const validationPlace = new FormValidator(validationOptions, popupPlace);
 
-enableValidation(validationOptions);
+validationProfile.enableValidation();
+validationPlace.enableValidation();
