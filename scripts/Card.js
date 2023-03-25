@@ -1,7 +1,7 @@
 export class Card {
-    constructor(fildForm, cardTemplate, imageZoom) {
-        this._name = fildForm.name;
-        this._link = fildForm.link;
+    constructor(fieldForm, cardTemplate, imageZoom) {
+        this._name = fieldForm.name;
+        this._link = fieldForm.link;
         this._templateSelector = cardTemplate;
         this._imageZoom = imageZoom;
     }
