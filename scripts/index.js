@@ -94,7 +94,9 @@ const imageZoom = (evt) => {
 
 /* --Рендеринг карточек-- */
 
+
 const renderElement = (fieldForm) => {
+    //console.log(cardTemplate);
     const cardElement = new Card(fieldForm, cardTemplate, imageZoom);
     return elementsList.prepend(cardElement.generateElement(fieldForm));
 };

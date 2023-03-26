@@ -2,7 +2,7 @@ export class FormValidator {
     constructor(validationOptions, popup) {
         this._validationOptions = validationOptions;
         this._form = popup.querySelector('.popup__form');
-        this._inputList = Array.from(this._form.querrySlectorAll(this.inputSelector));
+        this._inputList = Array.from(this._form.querySelectorAll(this._validationOptions.inputSelector));
     }
 
     _enableButton = (submitElement) => {
