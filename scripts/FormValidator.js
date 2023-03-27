@@ -1,8 +1,9 @@
 export class FormValidator {
-    constructor(validationOptions, popup) {
+    constructor(validationOptions, formElement) {
         this._validationOptions = validationOptions;
-        this._form = popup.querySelector('.popup__form');
+        this._form = formElement;
         this._inputList = Array.from(this._form.querySelectorAll(this._validationOptions.inputSelector));
+        this._submitElement = this._form.querySelector(this._validationOptions.submitSelector);
     }
 
     _enableButton = (submitElement) => {
@@ -16,13 +17,13 @@ export class FormValidator {
     };
 
     _toggleButtonState = () => {
-        const submitElement = this._form.querySelector(this._validationOptions.submitSelector);
+        //const submitElement = this._form.querySelector(this._validationOptions.submitSelector);
         const formIsValid = this._form.checkValidity();
 
         if (formIsValid) {
-            this._enableButton(submitElement);
+            this._enableButton(this._submitElement);
         } else {
-            this._disableButton(submitElement);
+            this._disableButton(this._submitElement);
         }
     };
 
@@ -65,12 +66,12 @@ export class FormValidator {
     };
 
     cleanValidation = () => {
-        this._cleanInputError();
+        this._cleanInputErrors();
         this._toggleButtonState();
     };
 
 
-    _cleanInputError = () => {
+    _cleanInputErrors = () => {
         this._inputList.forEach(inputElement => {
             this._hideError(inputElement);
         });

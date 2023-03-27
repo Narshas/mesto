@@ -1,10 +1,11 @@
 export class Card {
-    constructor(fieldForm, cardTemplate, imageZoom) {
+    constructor(fieldForm, cardTemplate, handleCardClick) {
         //console.log(cardTemplate);
         this._name = fieldForm.name;
         this._link = fieldForm.link;
         this._templateSelector = cardTemplate.content;
-        this._imageZoom = imageZoom;
+        this._handleCardClick = handleCardClick;
+
     }
 
     // _getTemplate() {
@@ -19,27 +20,30 @@ export class Card {
     //     return element
     // }
 
-    _likeToggle = (evt) => {
+    _toggleLike = (evt) => {
         evt.target.classList.toggle('elements__like-button_active');
     }
 
-    _cardDelete = (evt) => {
+    _deleteCard = (evt) => {
         evt.target.closest('.elements__item').remove();
     }
 
     generateElement() {
         this._element = this._templateSelector.cloneNode(true).children[0];
         // this._element = this._getTemplate();
+        this._cardImage = this._element.querySelector('.elements__image');
 
         this._element.querySelector('.elements__title').textContent = this._name;
-        this._element.querySelector('.elements__image').src = this._link;
-        this._element.querySelector('.elements__image').alt = this._name;
+        this._cardImage.src = this._link;
+        this._cardImage.alt = this._name;
 
-        this._element.querySelector('.elements__like-button').addEventListener('click', this._likeToggle);
-        this._element.querySelector('.elements__trash-button').addEventListener('click', this._cardDelete);
-        this._element.querySelector('.elements__image').addEventListener('click', this._imageZoom);
-
+        this._setEventListeners();
         return this._element;
     }
 
+    _setEventListeners = () => {
+        this._element.querySelector('.elements__like-button').addEventListener('click', this._toggleLike);
+        this._element.querySelector('.elements__trash-button').addEventListener('click', this._deleteCard);
+        this._cardImage.addEventListener('click', this._handleCardClick);
+    }
 }

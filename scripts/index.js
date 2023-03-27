@@ -20,14 +20,17 @@ const popupZoom = document.querySelector('.popup_zoom');
 const popupImage = popupZoom.querySelector('.popup__image');
 const popupCaption = popupZoom.querySelector('.popup__caption');
 
-const buttonClose = popupProfile.querySelector('.popup__close_profile');
-const buttonPlaceClose = popupPlace.querySelector('.popup__close_place');
+//const buttonClose = popupProfile.querySelector('.popup__close_profile');
+//const buttonPlaceClose = popupPlace.querySelector('.popup__close_place');
 
-const formElement = popupProfile.querySelector('.popup__form_profile');
-const formPlaceElement = popupPlace.querySelector('.popup__form_place');
+const formProfileElement = document.forms['profile__info'];
+const formPlaceElement = document.forms['place'];
 
 const elementsList = document.querySelector('.elements__list');
 const cardTemplate = document.querySelector('#user-card');
+
+const popups = document.querySelectorAll('.popup');
+const formValidators = {};
 
 //const newElementTitle = document.querySelector('.elements__title');
 //const newElementImage = document.querySelector('.elements__image');
@@ -35,16 +38,27 @@ const cardTemplate = document.querySelector('#user-card');
 
 /* -- функции обработчики-- */
 
+popups.forEach(popup => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_active')) {
+            closePopup(popup);
+        }
+        if (evt.target.classList.contains('popup__close')) {
+            closePopup(popup)
+        }
+    })
+})
+
 const closePopup = (popup) => {
     popup.classList.remove('popup_active');
     document.removeEventListener('keyup', handleEsc);
 }
 
-const closePopupOverlay = (event) => {
-    if (event.target === event.currentTarget) {
-        closePopup(event.currentTarget);
-    }
-};
+// const closePopupOverlay = (event) => {
+//     if (event.target === event.currentTarget) {
+//         closePopup(event.currentTarget);
+//     }
+// };
 
 const handleEsc = (evt) => {
     if (evt.key === 'Escape') {
@@ -62,10 +76,11 @@ const editPopupProfile = () => {
     openPopup(popupProfile);
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
-    validationProfile.cleanValidation();
+    //validationProfile.cleanValidation();
+    formValidators['profile__info'].cleanValidation();
 }
 
-const handleFormSubmit = (evt) => {
+const handleProfileFormSubmit = (evt) => {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileAbout.textContent = jobInput.value;
@@ -79,12 +94,11 @@ const handlePlaceFormSubmit = (evt) => {
         link: placeImageInput.value
     };
     renderElement(fieldForm);
-    placeNameInput.value = '';
-    placeImageInput.value = '';
+    evt.target.reset();
     closePopup(popupPlace);
 }
 
-const imageZoom = (evt) => {
+const handleCardClick = (evt) => {
     const itCard = evt.target.closest('.elements__item');
     popupCaption.textContent = itCard.querySelector('.elements__title').textContent;
     popupImage.src = itCard.querySelector('.elements__image').src;
@@ -96,43 +110,46 @@ const imageZoom = (evt) => {
 
 
 const renderElement = (fieldForm) => {
-    //console.log(cardTemplate);
-    const cardElement = new Card(fieldForm, cardTemplate, imageZoom);
-    return elementsList.prepend(cardElement.generateElement(fieldForm));
+    //console.log(cardTemplate); 
+    elementsList.prepend(createCard(fieldForm));
 };
 
-defoltElements.forEach(element => {
-    renderElement(element);
-});
+const createCard = (fieldForm) => {
+    const cardElement = new Card(fieldForm, cardTemplate, handleCardClick);
+    return cardElement.generateElement(fieldForm);
+}
+
+defoltElements.forEach(renderElement);
 
 /* ---- */
 
 buttonProfile.addEventListener('click', editPopupProfile);
 
-formElement.addEventListener('submit', handleFormSubmit);
+formProfileElement.addEventListener('submit', handleProfileFormSubmit);
 
 formPlaceElement.addEventListener('submit', handlePlaceFormSubmit);
 
-buttonClose.addEventListener('click', () => {
-    closePopup(popupProfile)
-});
+// buttonClose.addEventListener('click', () => {
+//     closePopup(popupProfile)
+// });
 
-popupZoom.querySelector('.popup__close_zoom').addEventListener('click', () => {
-    closePopup(popupZoom)
-});
+// popupZoom.querySelector('.popup__close_zoom').addEventListener('click', () => {
+//     closePopup(popupZoom)
+// });
 
-popupProfile.addEventListener('click', closePopupOverlay);
-popupPlace.addEventListener('click', closePopupOverlay);
-popupZoom.addEventListener('click', closePopupOverlay);
+// popupProfile.addEventListener('click', closePopupOverlay);
+// popupPlace.addEventListener('click', closePopupOverlay);
+// popupZoom.addEventListener('click', closePopupOverlay);
 
-buttonPlaceClose.addEventListener('click', () => {
-    closePopup(popupPlace)
-});
+// buttonPlaceClose.addEventListener('click', () => {
+//     closePopup(popupPlace)
+// });
 
 buttonAddCard.addEventListener('click', () => {
     openPopup(popupPlace);
-    validationPlace.cleanValidation();
     formPlaceElement.reset();
+    //validationPlace.cleanValidation();
+    formValidators['place'].cleanValidation();
 });
 /* ------------- Валидация ------------- */
 
@@ -146,8 +163,22 @@ const validationOptions = {
     inputErrorClass: 'popup__input-error_active',
 };
 
-const validationProfile = new FormValidator(validationOptions, popupProfile);
-const validationPlace = new FormValidator(validationOptions, popupPlace);
+// const validationProfile = new FormValidator(validationOptions, popupProfile);
+// const validationPlace = new FormValidator(validationOptions, popupPlace);
+// validationProfile.enableValidation();
+// validationPlace.enableValidation();
 
-validationProfile.enableValidation();
-validationPlace.enableValidation();
+const enableValidation = (validationOptions) => {
+    const formList = Array.from(document.querySelectorAll(validationOptions.formSelector))
+    formList.forEach((formElement) => {
+        const validator = new FormValidator(validationOptions, formElement)
+        // получаем данные из атрибута `name` у формы
+        const formName = formElement.getAttribute('name')
+
+        // вот тут в объект записываем под именем формы
+        formValidators[formName] = validator;
+        validator.enableValidation();
+    });
+};
+
+enableValidation(validationOptions);
