@@ -17,7 +17,6 @@ export class FormValidator {
     };
 
     _toggleButtonState = () => {
-        //const submitElement = this._form.querySelector(this._validationOptions.submitSelector);
         const formIsValid = this._form.checkValidity();
 
         if (formIsValid) {
@@ -55,7 +54,6 @@ export class FormValidator {
     }
 
     _setEventListeners = () => {
-        //const inputs = Array.from(form.querySelectorAll(validationOptions.inputSelector));
         this._form.addEventListener = ('submit', this._stopSubmit);
         this._inputList.forEach(inputElement => {
             inputElement.addEventListener('input', () => {
