@@ -2,6 +2,7 @@ import './index.css';
 import { defoltElements } from '../scripts/PresetCards.js';
 import { Card } from '../scripts/Card.js';
 import { FormValidator } from '../scripts/FormValidator.js';
+import { UserInfo } from '../scripts/UserInfo';
 
 /* -- DOM -- */
 const profileName = document.querySelector('.profile__name');
@@ -30,35 +31,43 @@ const cardTemplate = document.querySelector('#user-card');
 const popups = document.querySelectorAll('.popup');
 const formValidators = {};
 
-/* -- функции обработчики-- */
+/* ---- */
 
-popups.forEach(popup => {
-    popup.addEventListener('mousedown', (evt) => {
-        if (evt.target.classList.contains('popup_active')) {
-            closePopup(popup);
-        }
-        if (evt.target.classList.contains('popup__close')) {
-            closePopup(popup)
-        }
-    })
+const userInfo = new UserInfo({
+    userName: document.querySelector('.profile__name'),
+    userAbout: document.querySelector('.profile__about')
 })
 
-const closePopup = (popup) => {
-    popup.classList.remove('popup_active');
-    document.removeEventListener('keyup', handleEsc);
-}
+/* -- функции обработчики-- */
 
-const handleEsc = (evt) => {
-    if (evt.key === 'Escape') {
-        const openedPopup = document.querySelector('.popup_active');
-        closePopup(openedPopup);
-    }
-};
+// popups.forEach(popup => {
+//     popup.addEventListener('mousedown', (evt) => {
+//         if (evt.target.classList.contains('popup_active')) {
+//             closePopup(popup);
+//         }
+//         if (evt.target.classList.contains('popup__close')) {
+//             closePopup(popup)
+//         }
+//     })
+// })
 
-const openPopup = (popup) => {
-    popup.classList.add('popup_active');
-    document.addEventListener('keyup', handleEsc);
-}
+// const closePopup = (popup) => {
+//     popup.classList.remove('popup_active');
+//     document.removeEventListener('keyup', handleEsc);
+// }
+
+// const handleEsc = (evt) => {
+//     if (evt.key === 'Escape') {
+//         const openedPopup = document.querySelector('.popup_active');
+//         closePopup(openedPopup);
+//     }
+// };
+
+// const openPopup = (popup) => {
+//     popup.classList.add('popup_active');
+//     document.addEventListener('keyup', handleEsc);
+// }
+//-----//
 
 const editPopupProfile = () => {
     openPopup(popupProfile);
@@ -106,6 +115,16 @@ const createCard = (fieldForm) => {
 }
 
 defoltElements.forEach(renderElement);
+
+/* -- создание секции -- */
+
+const elementsSection = new Section({
+    defoltElements,
+    renderer: (item) => {
+        elementsSection.addItem(createCard(item));
+    },
+}, elementsList
+)
 
 /* ---- */
 

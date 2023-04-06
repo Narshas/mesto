@@ -1,26 +1,17 @@
 export class Section {
-    constructor(items, renderer) {
+    constructor({ items, renderer }, elementsList) {
         this._items = items;
         this._renderer = renderer;
-        //переменные в контейнер селектор
+        this._elementsList = elementsList; //возможен тут нужен .content
     }
 
-
-
     renderItem() {
-        renderer() {
-
-        }
-        this._items.array.forEach(element => {
-            //добавляем элемент в html via renderer
-
+        this._items.forEach(element => {
+            element._renderer;
         });
     }
 
-    addItem(element) {
-
-        //element append добавляем элемент в html
-        //разметка экземпляра класса
-
+    addItem(item) {
+        this._elementsList.prepend(item);
     }
 }

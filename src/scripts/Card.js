@@ -6,7 +6,7 @@ export class Card {
         this._handleCardClick = handleCardClick;
 
     }
-
+    //вынести хэндлеры в другой класс?
     _toggleLike = (evt) => {
         evt.target.classList.toggle('elements__like-button_active');
     }
