@@ -1,9 +1,9 @@
-import Popup from './Popup.js'
+import { Popup } from './Popup.js'
 export class PopupWithImage extends Popup {
     constructor(popup) {
         super(popup)
-        this._cardImage = this._popupElement.querySelector;
-        this._cardTitle = this._popupElement.querySelector;
+        this._cardImage = this._popup.querySelector('.popup__image');
+        this._cardTitle = this._popup.querySelector('.popup__caption');
     }
 
     open(fielForm) {

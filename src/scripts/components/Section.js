@@ -1,17 +1,17 @@
 export class Section {
-    constructor({ items, renderer }, elementsList) {
-        this._items = items;
+    constructor({ renderer }, elementsList) {
+        // this._items = items;
         this._renderer = renderer;
-        this._elementsList = elementsList; //возможен тут нужен .content
+        this._elementsList = elementsList;
     }
 
-    renderItem() {
-        this._items.forEach(element => {
+    renderItem = (items) => {
+        items.forEach(element => {
             this._renderer(element);
         });
     }
 
-    addItem(item) {
+    addItem = (item) => {
         this._elementsList.prepend(item);
     }
 }

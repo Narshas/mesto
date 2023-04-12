@@ -46,7 +46,7 @@ const handleProfileFormSubmit = (profileInfo) => {
     userInfo.setUserInfo(profileInfo);
 };
 
-const handlePlaceFormSubmit = ({ placeName, placeLink }) => {
+const handlePlaceFormSubmit = (placeName) => {
     fieldForm = {
         name: placeName,
         link: placeLink
@@ -83,14 +83,16 @@ const createCard = (fieldForm) => {
 }
 
 const createSection = new Section({
-    defoltElements,
+    // defoltElements,
     renderer: (item) => {
         createSection.addItem(createCard(item));
-    },
+    }
 }, elementsList
 );
 
-createSection.renderItem();
+console.log(defoltElements)
+
+createSection.renderItem(defoltElements);
 
 // //const renderElement = (fieldForm) => {
 //     elementsList.prepend(createCard(fieldForm));

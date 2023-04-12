@@ -4,7 +4,7 @@ export class Card {
         this._link = fieldForm.link;
         this._templateSelector = cardTemplate.content;
         this._handleCardClick = handleCardClick;
-        this._fieldForm = fieldFom;
+        this._fieldForm = fieldForm;
 
     }
     //вынести хэндлеры в другой класс?
