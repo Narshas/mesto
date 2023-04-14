@@ -52,13 +52,13 @@
             <h3 class="popup__title popup__title_profile">Редактировать профиль</h3>
             <form class="popup__form popup__form_profile" name="profile__info" novalidate>
                 <label for="username-input" class="popup__label"></label>
-                <input name="profile-text" id="username-input" type="text" minlength="2" maxlength="40"
-                    class="popup__input popup__input_profile" required>
+                <input name="profilename" id="username-input" type="text" minlength="2" maxlength="40"
+                    class="popup__input popup__input_profilename" required>
                 <span class="popup__input-error popup__input-error_username-input" id="username-input-error">В этом поле
                     ошибка</span>
                 <label for="about-input" class="popup__label"></label>
-                <input name="profile-text" id="about-input" type="text" minlength="2" maxlength="400"
-                    class="popup__input popup__input_profile" required>
+                <input name="profileabout" id="about-input" type="text" minlength="2" maxlength="400"
+                    class="popup__input popup__input_profileabout" required>
                 <span class="popup__input-error popup__input-error_about-input" id="about-input-error">В этом поле
                     ошибка</span>
                 <button type="submit" class="popup__submit popup__submit_profile" aria-label="Сохранить"
@@ -73,12 +73,12 @@
             <h3 class="popup__title">Новое место</h3>
             <form class="popup__form popup__form_place" name="place" novalidate>
                 <label for="place-name-input" class="popup__label"></label>
-                <input name="place-text" required id="place-name-input" type="text" minlength="2" maxlength="30"
+                <input name="placetext" required id="place-name-input" type="text" minlength="2" maxlength="30"
                     class="popup__input popup__input_place" placeholder="Какое место хотите добавить?">
                 <span class="popup__input-error popup__input-error_place-name-input" id="place-name-input-error">В этом
                     поле ошибка</span>
                 <label for="place-image-input" class="popup__label"></label>
-                <input name="place-url" required id="place-image-input" type="url"
+                <input name="placeurl" required id="place-image-input" type="url"
                     class="popup__input popup__input_place" placeholder="Есть ссылка на фото оттуда?">
                 <span class="popup__input-error popup__input-error_place-image-input" id="place-image-input-error">В
                     этом поле ошибка</span>

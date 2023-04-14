@@ -6,10 +6,10 @@ export class PopupWithImage extends Popup {
         this._cardTitle = this._popup.querySelector('.popup__caption');
     }
 
-    open(fielForm) {
+    open(fieldForm) {
         super.open();
-        this._cardTitle.textContent = fielForm.name;
-        this._cardImage.alt = fielForm.name;
-        this._cardImage.src = fielForm.link;
+        this._cardTitle.textContent = fieldForm.name;
+        this._cardImage.alt = fieldForm.name;
+        this._cardImage.src = fieldForm.link;
     }
 }

@@ -9,22 +9,21 @@ export class PopupWithForm extends Popup {
     }
 
     _getInputValues() {
-        this._inputListValues = {};
+        const inputListValues = {};
         this._inputList.forEach(input => {
-            this._inputListValues[input.name] = input.value;
+            inputListValues[input.name] = input.value;
         });
-        return this._inputListValues;
+        console.log(inputListValues);
+        return inputListValues;
     }
-
-    //передача d index
 
     setEventListeners() {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._handleFormSubmit(this._getInputValues());
-            this.close;
-        })
+            this.close();
+        });
     }
 
     close() {

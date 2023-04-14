@@ -4,13 +4,12 @@ import { Card } from '../scripts/components/Card.js';
 import { FormValidator } from '../scripts/components/FormValidator.js';
 import { Section } from '../scripts/components/Section.js';
 import { UserInfo } from '../scripts/components/UserInfo.js';
-//import { Popup } from '../scripts/components/Popup.js';
 import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
 import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
 
 /* -- DOM -- */
-const profileName = document.querySelector('.profile__name');
-const profileAbout = document.querySelector('.profile__about');
+//const profileName = document.querySelector('.profile__name');
+//const profileAbout = document.querySelector('.profile__about');
 
 const buttonProfile = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_profile');
@@ -19,38 +18,40 @@ const jobInput = popupProfile.querySelector('#about-input');
 
 const buttonAddCard = document.querySelector('.profile__add-button');
 const popupPlace = document.querySelector('.popup_place');
-const placeNameInput = popupPlace.querySelector('#place-name-input');
+//const placeNameInput = popupPlace.querySelector('#place-name-input');
 const placeImageInput = popupPlace.querySelector('#place-image-input');
 
 const popupZoom = document.querySelector('.popup_zoom');
 const popupImage = popupZoom.querySelector('.popup__image');
 const popupCaption = popupZoom.querySelector('.popup__caption');
 
-const formProfileElement = document.forms['profile__info'];
+//const formProfileElement = document.forms['profile__info'];
 const formPlaceElement = document.forms['place'];
 
 const elementsList = document.querySelector('.elements__list');
 const cardTemplate = document.querySelector('#user-card');
 
-const popups = document.querySelectorAll('.popup');
+//const popups = document.querySelectorAll('.popup');
 const formValidators = {};
+console.log(nameInput.textContent, placeImageInput.textContent);
 
 /* ---- */
 
 const userInfo = new UserInfo({
-    userName: 'profile__name',
-    userAbout: 'profile__about'
+    userName: '.profile__name',
+    userAbout: '.profile__about'
 })
 
 const handleProfileFormSubmit = (profileInfo) => {
     userInfo.setUserInfo(profileInfo);
 };
 
-const handlePlaceFormSubmit = (placeName) => {
-    fieldForm = {
-        name: placeName,
-        link: placeLink
+const handlePlaceFormSubmit = (placeInfo) => {
+    const fieldForm = {
+        name: placeInfo.placetext,
+        link: placeInfo.placeurl
     };
+    console.log(fieldForm);
     createSection.addItem(createCard(fieldForm));
     addPlacePopup.close();
 };
@@ -60,8 +61,10 @@ const addPlacePopup = new PopupWithForm(popupPlace, handlePlaceFormSubmit);
 
 const editPopupProfile = () => {
     editProfile.open();
-    nameInput.value = userInfo.getUserInfo.name;
-    jobInput.value = userInfo.getUserInfo.about;
+    const ProfileData = userInfo.getUserInfo();
+    nameInput.value = ProfileData.name;
+    jobInput.value = ProfileData.about;
+    console.log(ProfileData);
     formValidators['profile__info'].cleanValidation();
 };
 
@@ -83,25 +86,13 @@ const createCard = (fieldForm) => {
 }
 
 const createSection = new Section({
-    // defoltElements,
     renderer: (item) => {
         createSection.addItem(createCard(item));
     }
 }, elementsList
 );
 
-console.log(defoltElements)
-
 createSection.renderItem(defoltElements);
-
-// //const renderElement = (fieldForm) => {
-//     elementsList.prepend(createCard(fieldForm));
-// };
-
-
-//defoltElements.forEach(renderElement);
-
-/* -- создание секции -- */
 
 /* ---- */
 
@@ -133,10 +124,8 @@ const enableValidation = (validationOptions) => {
     const formList = Array.from(document.querySelectorAll(validationOptions.formSelector))
     formList.forEach((formElement) => {
         const validator = new FormValidator(validationOptions, formElement)
-        // получаем данные из атрибута `name` у формы
         const formName = formElement.getAttribute('name')
 
-        // вот тут в объект записываем под именем формы
         formValidators[formName] = validator;
         validator.enableValidation();
     });

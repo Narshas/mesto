@@ -8,11 +8,11 @@ export class UserInfo {
         return {
             name: this._userName.textContent,
             about: this._userAbout.textContent
-        }
+        };
     }
 
     setUserInfo(profileInfo) {
-        this._userName.textContent = profileInfo.name;
-        this._userAbout.textContent = profileInfo.about;
+        this._userName.textContent = profileInfo.profilename;
+        this._userAbout.textContent = profileInfo.profileabout;
     }
 }

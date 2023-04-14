@@ -1,7 +1,6 @@
 export class Popup {
     constructor(popup) {
         this._popup = popup;
-        //this._closeButton = this._popup.querrySelector('.popup__close');
     }
 
     open() {
@@ -20,7 +19,7 @@ export class Popup {
         }
     }
 
-    setEventListeners() {//объединенный обработчик крестика и оверлэя
+    setEventListeners() {
         this._popup.addEventListener('mousedown', (evt) => {
             if (evt.target.classList.contains('popup_active')) {
                 this.close();
