@@ -30,7 +30,7 @@ export class Card {
         this._element.querySelector('.elements__like-button').addEventListener('click', this._toggleLike);
         this._element.querySelector('.elements__trash-button').addEventListener('click', this._deleteCard);
         this._cardImage.addEventListener('click', () => {
-            this._handleCardClick(this._fieldForm);
+            this._handleCardClick(this._cardData);
         });
     }
 }
