@@ -1,15 +1,15 @@
 import { Popup } from './Popup.js'
 export class PopupWithImage extends Popup {
-    constructor(popup) {
-        super(popup)
+    constructor(popupSelector) {
+        super(popupSelector)
         this._cardImage = this._popup.querySelector('.popup__image');
         this._cardTitle = this._popup.querySelector('.popup__caption');
     }
 
-    open(fieldForm) {
+    open(cardData) {
         super.open();
-        this._cardTitle.textContent = fieldForm.name;
-        this._cardImage.alt = fieldForm.name;
-        this._cardImage.src = fieldForm.link;
+        this._cardTitle.textContent = cardData.name;
+        this._cardImage.alt = cardData.name;
+        this._cardImage.src = cardData.link;
     }
 }

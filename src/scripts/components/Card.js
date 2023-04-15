@@ -1,13 +1,11 @@
 export class Card {
-    constructor(fieldForm, cardTemplate, handleCardClick) {
-        this._name = fieldForm.name;
-        this._link = fieldForm.link;
+    constructor(cardData, cardTemplate, handleCardClick) {
         this._templateSelector = cardTemplate.content;
         this._handleCardClick = handleCardClick;
-        this._fieldForm = fieldForm;
+        this._cardData = cardData;
 
     }
-    //вынести хэндлеры в другой класс?
+
     _toggleLike = (evt) => {
         evt.target.classList.toggle('elements__like-button_active');
     }
@@ -20,9 +18,9 @@ export class Card {
         this._element = this._templateSelector.cloneNode(true).children[0];
         this._cardImage = this._element.querySelector('.elements__image');
 
-        this._element.querySelector('.elements__title').textContent = this._name;
-        this._cardImage.src = this._link;
-        this._cardImage.alt = this._name;
+        this._element.querySelector('.elements__title').textContent = this._cardData.name;
+        this._cardImage.src = this._cardData.link;
+        this._cardImage.alt = this._cardData.name;
 
         this._setEventListeners();
         return this._element;

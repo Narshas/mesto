@@ -1,8 +1,7 @@
 export class Section {
-    constructor({ renderer }, elementsList) {
-        // this._items = items;
+    constructor({ renderer }, elementsListSelector) {
         this._renderer = renderer;
-        this._elementsList = elementsList;
+        this._elementsList = document.querySelector(elementsListSelector);
     }
 
     renderItem = (items) => {

@@ -6,14 +6,14 @@ export class FormValidator {
         this._submitElement = this._form.querySelector(this._validationOptions.submitSelector);
     }
 
-    _enableButton = (submitElement) => {
-        submitElement.removeAttribute('disabled');
-        submitElement.classList.remove(this._validationOptions.disabledButtonClass);
+    _enableButton = () => {
+        this._submitElement.removeAttribute('disabled');
+        this._submitElement.classList.remove(this._validationOptions.disabledButtonClass);
     };
 
-    _disableButton = (submitElement) => {
-        submitElement.setAttribute('disabled', true);
-        submitElement.classList.add(this._validationOptions.disabledButtonClass);
+    _disableButton = () => {
+        this._submitElement.setAttribute('disabled', true);
+        this._submitElement.classList.add(this._validationOptions.disabledButtonClass);
     };
 
     _toggleButtonState = () => {

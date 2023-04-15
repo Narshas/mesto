@@ -1,5 +1,6 @@
 import './index.css';
-import { defoltElements } from '../scripts/PresetCards.js';
+import { DefoltElements } from '../scripts/utils/Constants.js';
+import { ValidationOptions } from '../scripts/utils/Constants';
 import { Card } from '../scripts/components/Card.js';
 import { FormValidator } from '../scripts/components/FormValidator.js';
 import { Section } from '../scripts/components/Section.js';
@@ -38,8 +39,8 @@ console.log(nameInput.textContent, placeImageInput.textContent);
 /* ---- */
 
 const userInfo = new UserInfo({
-    userName: '.profile__name',
-    userAbout: '.profile__about'
+    userNameSelector: '.profile__name',
+    userAboutSelector: '.profile__about'
 })
 
 const handleProfileFormSubmit = (profileInfo) => {
@@ -53,52 +54,44 @@ const handlePlaceFormSubmit = (placeInfo) => {
     };
     console.log(fieldForm);
     createSection.addItem(createCard(fieldForm));
-    addPlacePopup.close();
 };
 
-const editProfile = new PopupWithForm(popupProfile, handleProfileFormSubmit);
-const addPlacePopup = new PopupWithForm(popupPlace, handlePlaceFormSubmit);
+const editProfile = new PopupWithForm('.popup_profile', handleProfileFormSubmit);
+const addPlacePopup = new PopupWithForm('.popup_place', handlePlaceFormSubmit);
 
 const editPopupProfile = () => {
     editProfile.open();
-    const ProfileData = userInfo.getUserInfo();
-    nameInput.value = ProfileData.name;
-    jobInput.value = ProfileData.about;
-    console.log(ProfileData);
+    const profileData = userInfo.getUserInfo();
+    nameInput.value = profileData.name;
+    jobInput.value = profileData.about;
+    console.log(profileData);
     formValidators['profile__info'].cleanValidation();
 };
 
-const handleCardClick = (fieldForm) => {
-    openZoom.open(fieldForm);
-
-    const itCard = evt.target.closest('.elements__item');
-    popupCaption.textContent = itCard.querySelector('.elements__title').textContent;
-    popupImage.src = itCard.querySelector('.elements__image').src;
-    popupImage.alt = itCard.querySelector('.elements__title').textContent;
-    openPopup(popupZoom);
+const handleCardClick = (cardData) => {
+    openZoom.open(cardData);
 };
 
-const openZoom = new PopupWithImage(popupZoom);
+const openZoom = new PopupWithImage('.popup_zoom');
 
 const createCard = (fieldForm) => {
     const cardElement = new Card(fieldForm, cardTemplate, handleCardClick);
-    return cardElement.generateElement(fieldForm);
+    return cardElement.generateElement();
 }
 
 const createSection = new Section({
     renderer: (item) => {
         createSection.addItem(createCard(item));
     }
-}, elementsList
+}, '.elements__list'
 );
 
-createSection.renderItem(defoltElements);
+createSection.renderItem(DefoltElements);
 
 /* ---- */
 
 buttonAddCard.addEventListener('click', () => {
     addPlacePopup.open();
-    formPlaceElement.reset();
     formValidators['place'].cleanValidation();
 });
 
@@ -110,20 +103,10 @@ openZoom.setEventListeners();
 
 /* ------------- Валидация ------------- */
 
-const validationOptions = {
-    formSelector: '.popup__form',
-    submitSelector: '.popup__submit',
-    inputSelector: '.popup__input',
-    disabledButtonClass: 'popup__submit_inactive',
-    inputInvalidClass: 'popup__input_invalid',
-    inputErrorSelector: '.popup__input-error',
-    inputErrorClass: 'popup__input-error_active',
-};
-
-const enableValidation = (validationOptions) => {
-    const formList = Array.from(document.querySelectorAll(validationOptions.formSelector))
+const enableValidation = (ValidationOptions) => {
+    const formList = Array.from(document.querySelectorAll(ValidationOptions.formSelector))
     formList.forEach((formElement) => {
-        const validator = new FormValidator(validationOptions, formElement)
+        const validator = new FormValidator(ValidationOptions, formElement)
         const formName = formElement.getAttribute('name')
 
         formValidators[formName] = validator;
@@ -131,4 +114,4 @@ const enableValidation = (validationOptions) => {
     });
 };
 
-enableValidation(validationOptions);
+enableValidation(ValidationOptions);
