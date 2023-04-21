@@ -86,7 +86,7 @@
             </form>
         </div>
     </div>
-    <!-- Зум картинки  -->
+    <!-- Попап зума картинки  -->
     <div class="popup popup_zoom">
         <div class="popup__zoom-container">
             <button class="popup__close popup__close_zoom"></button>
@@ -94,6 +94,46 @@
             <p class="popup__caption"></p>
         </div>
     </div>
+    <!-- Попап подтверждения удаления  -->
+    <div class="popup popup_delete">
+        <div class="popup__container">
+            <!-- Подумать нужен ли тут допкласс popup__delete-container  -->
+            <button type="button" class="popup__close popup__close_delete" aria-label="закрыть попап"></button>
+            <h3 class="popup__title">Вы уверены?</h3>
+            <button type="submit" class="popup__submit popup__submit_delete" aria-label="Удалить карточку">Да</button>
+        </div>
+    </div>
+
+    popup_delete
+    popup__delete-container
+    popup__close_delete
+    popup__submit_delete
+
+    <!-- Попап обновить аватар  -->
+    <div class="popup popup_avatar">
+        <div class="popup__container">
+            <!-- Подумать нужен ли тут допкласс popup__avatar-container  -->
+            <button type="button" class="popup__close popup__close_avatar" aria-label="закрыть попап"></button>
+            <h3 class="popup__title">Обновить аватар</h3>
+            <form class="popup__form popup__form_avatar" name="avatar" novalidate>
+                <label for="avatar-input" class="popup__label"></label>
+                <input name="avatarurl" required id="avatar-input" type="url" class="popup__input popup__input_avatar"
+                    placeholder="Ссылка на новый аватар">
+                <span class="popup__input-error popup__input-error_avatar-input" id="avatar-input-error">В
+                    этом поле ошибка</span>
+                <button type="submit" class="popup__submit popup__submit_avatar"
+                    aria-label="Сохранить">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
+    popup_avatar
+    popup__close_avatar
+    popup__form_avatar
+    popup__input_avatar
+    popup__input-error_avatar-input
+    popup__submit_avatar
+
     <!-- шаблон карточки -->
     <template id='user-card'>
         <li class="elements__item">

@@ -1,5 +1,5 @@
 import './index.css';
-import { DefoltElements } from '../scripts/utils/Constants.js';
+//import { DefoltElements } from '../scripts/utils/Constants.js';
 import { ValidationOptions } from '../scripts/utils/Constants';
 import { Card } from '../scripts/components/Card.js';
 import { FormValidator } from '../scripts/components/FormValidator.js';
@@ -7,6 +7,7 @@ import { Section } from '../scripts/components/Section.js';
 import { UserInfo } from '../scripts/components/UserInfo.js';
 import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
 import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
+import { Api } from '../scripts/components/Api.js'
 
 /* -- DOM -- */
 //const profileName = document.querySelector('.profile__name');
@@ -34,7 +35,32 @@ const cardTemplate = document.querySelector('#user-card');
 
 //const popups = document.querySelectorAll('.popup');
 const formValidators = {};
-console.log(nameInput.textContent, placeImageInput.textContent);
+
+let user = {};
+let card = {};
+/* ------------- api ------------- */
+const api = new Api({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-64',
+    headers: {
+        authorization: '6891c063-8435-431b-87d5-a0d9903b0e56',
+        'Content-Type': 'application/json'
+    }
+})
+
+api.getUserInfo()
+    //Это равностительно тому, что я бы переписал весь код из метода getUserInfo объе api
+    .then(res => { user.setUserInfo(res) })
+    //что тут делает user и почему ты сделал такой пустой объект?
+    .catch(error => console.log(`Ошибка: ${error}`))
+
+api.getDefoltElements()
+    .then(res => {
+        const DefoltElements = [];
+        res.forEach(item => {
+            DefoltElements.push({ name: item.name, link: item.link })
+        })
+        createSection.renderItem(DefoltElements)
+    })
 
 /* ---- */
 
@@ -86,7 +112,7 @@ const createSection = new Section({
 }, '.elements__list'
 );
 
-createSection.renderItem(DefoltElements);
+//createSection.renderItem(DefoltElements);
 
 /* ---- */
 
@@ -100,6 +126,8 @@ buttonProfile.addEventListener('click', editPopupProfile);
 editProfile.setEventListeners();
 addPlacePopup.setEventListeners();
 openZoom.setEventListeners();
+
+
 
 /* ------------- Валидация ------------- */
 
