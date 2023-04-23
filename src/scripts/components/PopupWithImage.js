@@ -1,4 +1,5 @@
 import { Popup } from './Popup.js'
+//на вход мы сюда передаем весь массив данных о карточке cardData — надо это учесть
 export class PopupWithImage extends Popup {
     constructor(popupSelector) {
         super(popupSelector)

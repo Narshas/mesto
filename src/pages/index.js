@@ -36,8 +36,7 @@ const cardTemplate = document.querySelector('#user-card');
 //const popups = document.querySelectorAll('.popup');
 const formValidators = {};
 
-let user = {};
-let card = {};
+let userId;
 /* ------------- api ------------- */
 const api = new Api({
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-64',
@@ -47,19 +46,15 @@ const api = new Api({
     }
 })
 
-api.getUserInfo()
-    //Это равностительно тому, что я бы переписал весь код из метода getUserInfo объе api
-    .then(res => { user.setUserInfo(res) })
-    //что тут делает user и почему ты сделал такой пустой объект?
-    .catch(error => console.log(`Ошибка: ${error}`))
+Promise.all([api.getDefoltElements(), api.getUserInfo()])
+    .then(([cardsData, userData]) => {
+        userId = userData._id
+        userInfo.setUserInfo({ name: res.name, about: res.about, avatar: res.avatar })
+        //наверное лучше тоже весь рес передать тут
 
-api.getDefoltElements()
-    .then(res => {
-        const DefoltElements = [];
-        res.forEach(item => {
-            DefoltElements.push({ name: item.name, link: item.link })
-        })
-        createSection.renderItem(DefoltElements)
+        createSection.renderItem(cardsData)
+
+
     })
 
 /* ---- */
@@ -77,9 +72,12 @@ const handlePlaceFormSubmit = (placeInfo) => {
     const fieldForm = {
         name: placeInfo.placetext,
         link: placeInfo.placeurl
-    };
-    console.log(fieldForm);
-    createSection.addItem(createCard(fieldForm));
+    }
+    api.postNewCard(fieldForm)
+        .then(res => {
+            createSection.addItem(createCard(res));
+        })
+    //createSection.addItem(createCard(fieldForm))
 };
 
 const editProfile = new PopupWithForm('.popup_profile', handleProfileFormSubmit);
@@ -98,12 +96,47 @@ const handleCardClick = (cardData) => {
     openZoom.open(cardData);
 };
 
+// const handleDeleteClick = (cardId) => {
+//     api.deleteCard(cardId)
+//         .then(res => {
+//             console.log('delete')
+//         })
+// .then(res => {
+//     const DefoltElements = res.map(item => {
+//         const container = {};
+//         container.name = item.name
+//         container.link = item.link
+//     })
+// }
+
+
 const openZoom = new PopupWithImage('.popup_zoom');
 
-const createCard = (fieldForm) => {
-    const cardElement = new Card(fieldForm, cardTemplate, handleCardClick);
+const createCard = (cardData) => {
+    const cardElement = new Card({
+        cardData,
+        cardTemplate,
+        userId,
+        handleCardClick,
+        handleDeleteClick: (cardData) => {
+            //тут должен вызываться попап удаления
+            api.deleteCard(cardData._id)
+                .then(res => {
+                    console.log('delete')
+                })
+        },
+        handleLikeClick: (evt, cardData) => {
+            api.addlikeCard(cardData.likes)
+                .then(res => {
+                    //массив объектов кажды из которых объект с данными юхера который лайкнул эту картчоку
+                    //тут должен быть if лайкнуто или нет
+                    createCard.setLikes(evt, cardData.likes)
+                })
+        }
+
+    });
     return cardElement.generateElement();
-}
+};
 
 const createSection = new Section({
     renderer: (item) => {

@@ -100,7 +100,10 @@
             <!-- Подумать нужен ли тут допкласс popup__delete-container  -->
             <button type="button" class="popup__close popup__close_delete" aria-label="закрыть попап"></button>
             <h3 class="popup__title">Вы уверены?</h3>
-            <button type="submit" class="popup__submit popup__submit_delete" aria-label="Удалить карточку">Да</button>
+            <form class="popup__form popup__form_delete" name="profile__info" novalidate>
+                <button type="submit" class="popup__submit popup__submit_delete"
+                    aria-label="Удалить карточку">Да</button>
+            </form>
         </div>
     </div>
 
