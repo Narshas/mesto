@@ -7,12 +7,10 @@ import { Section } from '../scripts/components/Section.js';
 import { UserInfo } from '../scripts/components/UserInfo.js';
 import { PopupWithImage } from '../scripts/components/PopupWithImage.js';
 import { PopupWithForm } from '../scripts/components/PopupWithForm.js';
-import { Api } from '../scripts/components/Api.js'
+import { Api } from '../scripts/components/Api.js';
+import { PopupWithDelete } from '../scripts/components/PopupWithDelete.js';
 
 /* -- DOM -- */
-//const profileName = document.querySelector('.profile__name');
-//const profileAbout = document.querySelector('.profile__about');
-
 const buttonProfile = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.popup_profile');
 const nameInput = popupProfile.querySelector('#username-input');
@@ -20,20 +18,18 @@ const jobInput = popupProfile.querySelector('#about-input');
 
 const buttonAddCard = document.querySelector('.profile__add-button');
 const popupPlace = document.querySelector('.popup_place');
-//const placeNameInput = popupPlace.querySelector('#place-name-input');
 const placeImageInput = popupPlace.querySelector('#place-image-input');
 
 const popupZoom = document.querySelector('.popup_zoom');
 const popupImage = popupZoom.querySelector('.popup__image');
 const popupCaption = popupZoom.querySelector('.popup__caption');
 
-//const formProfileElement = document.forms['profile__info'];
+const popupDelete = document.querySelector('.popup_delete');
 const formPlaceElement = document.forms['place'];
 
 const elementsList = document.querySelector('.elements__list');
 const cardTemplate = document.querySelector('#user-card');
 
-//const popups = document.querySelectorAll('.popup');
 const formValidators = {};
 
 let userId;
@@ -49,23 +45,32 @@ const api = new Api({
 Promise.all([api.getDefoltElements(), api.getUserInfo()])
     .then(([cardsData, userData]) => {
         userId = userData._id
-        userInfo.setUserInfo({ name: res.name, about: res.about, avatar: res.avatar })
-        //наверное лучше тоже весь рес передать тут
-
+        userInfo.setUserInfo(userData)
+        userInfo.setAvatar(userData)
         createSection.renderItem(cardsData)
-
-
     })
 
 /* ---- */
 
 const userInfo = new UserInfo({
     userNameSelector: '.profile__name',
-    userAboutSelector: '.profile__about'
+    userAboutSelector: '.profile__about',
+    userAvatarSelector: '.profile__avatar'
 })
 
 const handleProfileFormSubmit = (profileInfo) => {
-    userInfo.setUserInfo(profileInfo);
+    userData = {
+        name: profileInfo.profilename,
+        about: profileInfo.profileabout
+    }
+    editProfile.showLoading(true);
+    api.patchUserInfo(userData)
+        .then(res => {
+            userInfo.setUserInfo(res);
+        })
+        .finally(() => {
+            editProfile.showLoading(true);
+        })
 };
 
 const handlePlaceFormSubmit = (placeInfo) => {
@@ -73,15 +78,32 @@ const handlePlaceFormSubmit = (placeInfo) => {
         name: placeInfo.placetext,
         link: placeInfo.placeurl
     }
+    addPlacePopup.showLoading(true)
     api.postNewCard(fieldForm)
         .then(res => {
             createSection.addItem(createCard(res));
         })
-    //createSection.addItem(createCard(fieldForm))
+        .finally(() => {
+            addPlacePopup.showLoading(false);
+        })
 };
 
 const editProfile = new PopupWithForm('.popup_profile', handleProfileFormSubmit);
 const addPlacePopup = new PopupWithForm('.popup_place', handlePlaceFormSubmit);
+const deleteCardPopup = new PopupWithDelete('.popup_delete');
+const changeAvatar = new PopupWithForm('.popup_avatar', {
+    handleFormSubmit: (avatarData) => {
+        changeAvatar.showLoading(true)
+        api.patchAvatar(avatarData)
+            .then(res => {
+                UserInfo.setAvatar(res);
+                changeAvatar.close();
+            })
+            .finally(() => {
+                changeAvatar.showLoading(false);
+            })
+    }
+})
 
 const editPopupProfile = () => {
     editProfile.open();
@@ -96,20 +118,6 @@ const handleCardClick = (cardData) => {
     openZoom.open(cardData);
 };
 
-// const handleDeleteClick = (cardId) => {
-//     api.deleteCard(cardId)
-//         .then(res => {
-//             console.log('delete')
-//         })
-// .then(res => {
-//     const DefoltElements = res.map(item => {
-//         const container = {};
-//         container.name = item.name
-//         container.link = item.link
-//     })
-// }
-
-
 const openZoom = new PopupWithImage('.popup_zoom');
 
 const createCard = (cardData) => {
@@ -119,21 +127,36 @@ const createCard = (cardData) => {
         userId,
         handleCardClick,
         handleDeleteClick: (cardData) => {
-            //тут должен вызываться попап удаления
-            api.deleteCard(cardData._id)
+            deleteCardPopup.open(cardData);
+            deleteCardPopup.handleDelete(() => {
+                api.deleteCard(cardData._id)
+                    .then(res => {
+                        deleteCardPopup.close();
+                        createCard.deleteCard();
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            })
+        },
+        handleLikeClick: (cardData) => {
+            api.addlike(cardData._id)
                 .then(res => {
-                    console.log('delete')
+                    createCard.setLikes(res.likes)
+                })
+                .catch(err => {
+                    console.log(err);
                 })
         },
-        handleLikeClick: (evt, cardData) => {
-            api.addlikeCard(cardData.likes)
+        handleRemoveLike: (cardData) => {
+            api.removeLike(cardData._id)
                 .then(res => {
-                    //массив объектов кажды из которых объект с данными юхера который лайкнул эту картчоку
-                    //тут должен быть if лайкнуто или нет
-                    createCard.setLikes(evt, cardData.likes)
+                    createCard.setLikes(res.likes)
+                })
+                .catch(err => {
+                    console.log(err);
                 })
         }
-
     });
     return cardElement.generateElement();
 };
@@ -144,8 +167,6 @@ const createSection = new Section({
     }
 }, '.elements__list'
 );
-
-//createSection.renderItem(DefoltElements);
 
 /* ---- */
 

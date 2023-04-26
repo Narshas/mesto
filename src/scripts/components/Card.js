@@ -1,63 +1,56 @@
 export class Card {
-    constructor({ cardData, cardTemplate, userId, handleCardClick, handleDeleteClick, handleLikeClick }) {
+    constructor({ cardData, cardTemplate, userId, handleCardClick, handleDeleteClick, handleLikeClick, handleRemoveLike }) {
         this._templateSelector = cardTemplate.content;
         this._handleCardClick = handleCardClick;
-        //мы передали рес целиком, надо тут его очистить?
         this._cardData = cardData;
         this._userId = userId;
         this._handleDeleteClick = handleDeleteClick;
         this._handleLikeClick = handleLikeClick;
-        //ownerid = cardData.owner._id
+        this._handleRemoveLike = handleRemoveLike;
     }
 
-    setLikes(evt, cardLikes) {
-        //this._likeCount = this._cardData.likes.length
-        //В ещё не свертсанный элемент likeCount мы записываем this._cardData.likes.length
-        this._likes = this._cardData.likes //тут надо ещё добавить 
-        this._toggleLike(evt)
+    setLikes(cardLikes) {
+        this._likes = cardLikes;
+        this._buttonLike.classList.toggle('elements__like-button_active');
+        this._likeCounter = this._likes.lenght;
     }
 
-    _toggleLike = (evt) => {
-        if (this._cardData.likes.some(element => element._id === this._userId)) {
-            this._cardData
-            evt.target.classList.toggle('elements__like-button_active');
-            //нужно добавить свой лайк к общему массиву
-        }
-        //тут тоже нужен обработчик снаружи? Или сделать этот метод публичным
-    }
-
-    _deleteCard = (evt) => {
-
-        //evt.target.closest('.elements__item').remove();
-        this._handleDeleteClick(this._cardData._id)
-        //handleDeleteClick это api.deleteCard
+    deleteCard = (evt) => {
+        this._card.remove();
     }
 
     generateElement() {
         this._element = this._templateSelector.cloneNode(true).children[0];
         this._cardImage = this._element.querySelector('.elements__image');
+        this._buttonLike = this._element.querySelector('.elements__like-button');
+        this._trashButton = this._element.querySelector('.elements__trash-button');
+        this._likeCounter = this._element.querySelector('.elements__like-counter');
 
         this._element.querySelector('.elements__title').textContent = this._cardData.name;
         this._cardImage.src = this._cardData.link;
         this._cardImage.alt = this._cardData.name;
 
-        this._setEventListeners();
-
         if (this._cardData.owner._id !== this._userId) {
-            this._element.querySelector('.elements__trash-button').style.display = 'none'
+            this._trashButton.style.display == 'none'
         }
 
-        // this._likeCounter = this._cardData.likes.length
+        this._likeCounter.textContent = this._likes.lenght;
+        this._setEventListeners();
 
         return this._element;
     }
 
     _setEventListeners = () => {
-        this._element.querySelector('.elements__like-button').addEventListener('click', () => {
-            this._handleLikeClick(this._cardData._id)
+        this._buttonLike.addEventListener('click', () => {
+            if (this._buttonLike.classList.contains('elements__like-button_active')) {
+                this._handleRemoveLike(this._cardData);
+            } else {
+                this._handleLikeClick(this._cardData);
+            }
         });
-        this._element.querySelector('.elements__trash-button').addEventListener('click', () => {
-            this._deleteCard
+        this._trashButton.addEventListener('click', () => {
+            this._handleDeleteClick()
+            this._handleDeleteClick(this._cardData);
         });
         this._cardImage.addEventListener('click', () => {
             this._handleCardClick(this._cardData);

@@ -13,7 +13,6 @@
 
     <header class="header">
         <img src="<%=require('./images/logo-white.svg')%>" alt="Логотип сервиса Место" class="header__logo">
-        <!-- <img src="./images/logo-white.svg" alt="Логотип сервиса Место" class="header__logo"> -->
     </header>
 
     <main class="content">
@@ -21,7 +20,8 @@
         <section class="profile">
             <img src="<%=require('./images/yet_another_travaller.jpg')%>" alt="фото пользователя"
                 class="profile__avatar">
-            <!-- <img src="./images/yet_another_travaller.jpg" alt="фото пользователя" class="profile__avatar"> -->
+            <img src="<%=require('./images/Vektor.svg')%>" alt="Кнопка редактирования аватара"
+                class="profile__avatar-edit">
             <div class="profile__info">
                 <div class="profile__wraper">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -145,6 +145,7 @@
             <div class="elements__block">
                 <h2 class="elements__title">Москва</h2>
                 <button type="button" class="elements__like-button" aria-label="поставить лайк месту"></button>
+                <p class="elements__like-counter"></p>
             </div>
         </li>
     </template>

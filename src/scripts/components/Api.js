@@ -54,13 +54,13 @@ export class Api {
             })
     }
 
-    patchUserInfo(userName, userAbout) {
+    patchUserInfo(userData) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                name: userName,
-                about: userAbout
+                name: userData.name,
+                about: userData.about
             })
         })
             .then(res => this._testRes(res))
@@ -69,7 +69,7 @@ export class Api {
             })
     }
 
-    addlikeCard(cardId) {
+    addlike(cardId) {
         return fetch(`${this._baseUrl}/cards/${cardId}`, {
             method: 'PUT',
             headers: this._headers
@@ -80,7 +80,7 @@ export class Api {
             })
     }
 
-    deleteLikeCard(cardId) {
+    removeLike(cardId) {
         return fetch(`${this._baseUrl}/cards/${cardId}`, {
             method: 'DELETE',
             headers: this._headers
@@ -92,12 +92,12 @@ export class Api {
         //Это скорее всего не понадобится, вспомни как лайк переключался в теории
     }
 
-    patchAvatar(avatar) {
+    patchAvatar(avatarData) {
         return fetch(`${this._baseUrl}/cards/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                avatar: avatar
+                avatar: avatarData.avatarurl
             })
         })
             .then(res => this._testRes(res))
