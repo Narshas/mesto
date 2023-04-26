@@ -42,14 +42,6 @@ const api = new Api({
     }
 })
 
-Promise.all([api.getDefoltElements(), api.getUserInfo()])
-    .then(([cardsData, userData]) => {
-        userId = userData._id
-        userInfo.setUserInfo(userData)
-        userInfo.setAvatar(userData)
-        createSection.renderItem(cardsData)
-    })
-
 /* ---- */
 
 const userInfo = new UserInfo({
@@ -197,3 +189,11 @@ const enableValidation = (ValidationOptions) => {
 };
 
 enableValidation(ValidationOptions);
+
+Promise.all([api.getDefoltElements(), api.getUserInfo()])
+    .then(([cardsData, userData]) => {
+        userId = userData._id
+        userInfo.setUserInfo(userData)
+        userInfo.setAvatar(userData)
+        createSection.renderItem(cardsData)
+    })
