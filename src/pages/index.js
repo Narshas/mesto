@@ -65,6 +65,18 @@ const handlePlaceFormSubmit = (placeInfo) => {
         })
 };
 
+const handleAvatarFormSubmit = (avatarData) => {
+    changeAvatar.showLoading(true)
+    api.patchAvatar(avatarData)
+        .then(res => {
+            UserInfo.setAvatar(res);
+            changeAvatar.close();
+        })
+        .finally(() => {
+            changeAvatar.showLoading(false);
+        })
+};
+
 const handleCardClick = (cardData) => {
     openZoom.open(cardData);
 };
@@ -112,6 +124,7 @@ const createCard = (cardData) => {
 
 const editProfile = new PopupWithForm('.popup_profile', handleProfileFormSubmit);
 const addPlacePopup = new PopupWithForm('.popup_place', handlePlaceFormSubmit);
+const changeAvatar = new PopupWithForm('.popup_avatar', handleAvatarFormSubmit);
 const openZoom = new PopupWithImage('.popup_zoom');
 const deleteCardPopup = new PopupWithDelete('.popup_delete', {
     handleFormSubmit: (cardElement, cardData) => {
@@ -125,21 +138,6 @@ const deleteCardPopup = new PopupWithDelete('.popup_delete', {
             })
     }
 });
-
-const changeAvatar = new PopupWithForm('.popup_avatar', {
-    handleFormSubmit: (avatarData) => {
-        changeAvatar.showLoading(true)
-        api.patchAvatar(avatarData)
-            .then(res => {
-                UserInfo.setAvatar(res);
-                changeAvatar.close();
-            })
-            .finally(() => {
-                changeAvatar.showLoading(false);
-            })
-    }
-})
-
 
 
 const createSection = new Section({
