@@ -69,8 +69,8 @@ const handleAvatarFormSubmit = (avatarData) => {
     changeAvatar.showLoading(true)
     api.patchAvatar(avatarData)
         .then(res => {
-            console.log('рес в аватархандл', res)
-            UserInfo.setAvatar(res);
+            //console.log('рес в аватархандл', res)
+            userInfo.setAvatar(res);
             changeAvatar.close();
         })
         .finally(() => {
