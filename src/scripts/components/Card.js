@@ -7,16 +7,13 @@ export class Card {
         this._handleDeleteClick = handleDeleteClick;
         this._handleLikeClick = handleLikeClick;
         this._handleRemoveLike = handleRemoveLike;
+        this._likes = cardData.likes;
     }
 
-    setLikes(cardLikes) {
-        this._likes = cardLikes;
+    setLikes(cardData) {
+        this._likes = cardData.likes;
         this._buttonLike.classList.toggle('elements__like-button_active');
-        this._likeCounter = this._likes.lenght;
-    }
-
-    deleteCard = (evt) => {
-        this._card.remove();
+        this._likeCounter.textContent = this._likes.length;
     }
 
     generateElement() {
@@ -31,13 +28,17 @@ export class Card {
         this._cardImage.alt = this._cardData.name;
 
         if (this._cardData.owner._id !== this._userId) {
-            this._trashButton.style.display == 'none'
+            this._trashButton.remove();
         }
 
-        this._likeCounter.textContent = this._likes.lenght;
+        this._likeCounter.textContent = this._likes.length;
         this._setEventListeners();
 
         return this._element;
+    }
+
+    deleteCard = () => {
+        this._element.remove();
     }
 
     _setEventListeners = () => {
@@ -49,8 +50,7 @@ export class Card {
             }
         });
         this._trashButton.addEventListener('click', () => {
-            this._handleDeleteClick()
-            this._handleDeleteClick(this._cardData);
+            this._handleDeleteClick(this, this._cardData);
         });
         this._cardImage.addEventListener('click', () => {
             this._handleCardClick(this._cardData);

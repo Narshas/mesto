@@ -42,11 +42,10 @@ class Api {
             })
     }
 
-    deleteCard(cardId) {
-        //_cardId есть в её джейсоне, только как его достать
-        return fetch(`${this._baseUrl}/cards/${cardId}`, {
+    deleteCard(cardData) {
+        return fetch(`${this._baseUrl}/cards/${cardData._id}`, {
             method: 'DELETE',
-            headers: this._headers
+            headers: this._headers,
         })
             .then(res => this._testRes(res))
             .catch(err => {
@@ -70,7 +69,7 @@ class Api {
     }
 
     addlike(cardId) {
-        return fetch(`${this._baseUrl}/cards/${cardId}`, {
+        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
             method: 'PUT',
             headers: this._headers
         })
@@ -81,7 +80,7 @@ class Api {
     }
 
     removeLike(cardId) {
-        return fetch(`${this._baseUrl}/cards/${cardId}`, {
+        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
             method: 'DELETE',
             headers: this._headers
         })
@@ -89,11 +88,10 @@ class Api {
             .catch(err => {
                 console.log(err)
             })
-        //Это скорее всего не понадобится, вспомни как лайк переключался в теории
     }
 
     patchAvatar(avatarData) {
-        return fetch(`${this._baseUrl}/cards/me/avatar`, {
+        return fetch(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({

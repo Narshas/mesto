@@ -15,10 +15,10 @@ const nameInput = popupProfile.querySelector('#username-input');
 const jobInput = popupProfile.querySelector('#about-input');
 const buttonAddCard = document.querySelector('.profile__add-button');
 const cardTemplate = document.querySelector('#user-card');
+const buttonAvatar = document.querySelector('.profile__avatar');
 const formValidators = {};
 let userId;
 /* -------------------------- */
-
 
 Promise.all([api.getDefoltElements(), api.getUserInfo()])
     .then(([cardsData, userData]) => {
@@ -28,16 +28,15 @@ Promise.all([api.getDefoltElements(), api.getUserInfo()])
         createSection.renderItem(cardsData)
     })
 
-/* ---- */
-
 const userInfo = new UserInfo({
     userNameSelector: '.profile__name',
     userAboutSelector: '.profile__about',
     userAvatarSelector: '.profile__avatar'
 })
 
+/* ---- */
 const handleProfileFormSubmit = (profileInfo) => {
-    userData = {
+    const userData = {
         name: profileInfo.profilename,
         about: profileInfo.profileabout
     }
@@ -66,9 +65,67 @@ const handlePlaceFormSubmit = (placeInfo) => {
         })
 };
 
+const handleCardClick = (cardData) => {
+    openZoom.open(cardData);
+};
+
+const editPopupProfile = () => {
+    editProfile.open();
+    const profileData = userInfo.getUserInfo();
+    nameInput.value = profileData.name;
+    jobInput.value = profileData.about;
+    formValidators['profile__info'].cleanValidation();
+};
+
+const createCard = (cardData) => {
+    const cardElement = new Card({
+        cardData,
+        cardTemplate,
+        userId,
+        handleCardClick,
+        handleDeleteClick: (cardElement, cardData) => {
+            deleteCardPopup.open(cardElement, cardData);
+        },
+        handleLikeClick: (cardData) => {
+            console.log(cardData._id)
+            api.addlike(cardData._id)
+                .then(res => {
+                    cardElement.setLikes(res)
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        },
+        handleRemoveLike: (cardData) => {
+            console.log(cardData._id)
+            api.removeLike(cardData._id)
+                .then(res => {
+                    cardElement.setLikes(res)
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+    });
+    return cardElement.generateElement();
+};
+
 const editProfile = new PopupWithForm('.popup_profile', handleProfileFormSubmit);
 const addPlacePopup = new PopupWithForm('.popup_place', handlePlaceFormSubmit);
-const deleteCardPopup = new PopupWithDelete('.popup_delete');
+const openZoom = new PopupWithImage('.popup_zoom');
+const deleteCardPopup = new PopupWithDelete('.popup_delete', {
+    handleFormSubmit: (cardElement, cardData) => {
+        api.deleteCard(cardData)
+            .then(() => {
+                cardElement.deleteCard();
+                deleteCardPopup.close();
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+});
+
 const changeAvatar = new PopupWithForm('.popup_avatar', {
     handleFormSubmit: (avatarData) => {
         changeAvatar.showLoading(true)
@@ -83,61 +140,7 @@ const changeAvatar = new PopupWithForm('.popup_avatar', {
     }
 })
 
-const editPopupProfile = () => {
-    editProfile.open();
-    const profileData = userInfo.getUserInfo();
-    nameInput.value = profileData.name;
-    jobInput.value = profileData.about;
-    console.log(profileData);
-    formValidators['profile__info'].cleanValidation();
-};
 
-const handleCardClick = (cardData) => {
-    openZoom.open(cardData);
-};
-
-const openZoom = new PopupWithImage('.popup_zoom');
-
-const createCard = (cardData) => {
-    const cardElement = new Card({
-        cardData,
-        cardTemplate,
-        userId,
-        handleCardClick,
-        handleDeleteClick: (cardData) => {
-            deleteCardPopup.open(cardData);
-            deleteCardPopup.handleDelete(() => {
-                api.deleteCard(cardData._id)
-                    .then(res => {
-                        deleteCardPopup.close();
-                        createCard.deleteCard();
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
-            })
-        },
-        handleLikeClick: (cardData) => {
-            api.addlike(cardData._id)
-                .then(res => {
-                    createCard.setLikes(res.likes)
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-        },
-        handleRemoveLike: (cardData) => {
-            api.removeLike(cardData._id)
-                .then(res => {
-                    createCard.setLikes(res.likes)
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-        }
-    });
-    return cardElement.generateElement();
-};
 
 const createSection = new Section({
     renderer: (item) => {
@@ -152,14 +155,17 @@ buttonAddCard.addEventListener('click', () => {
     addPlacePopup.open();
     formValidators['place'].cleanValidation();
 });
-
 buttonProfile.addEventListener('click', editPopupProfile);
+buttonAvatar.addEventListener('click', () => {
+    changeAvatar.open();
+    //formValidators['avatarurl'].cleanValidation();
+});
 
 editProfile.setEventListeners();
 addPlacePopup.setEventListeners();
 openZoom.setEventListeners();
-
-
+deleteCardPopup.setEventListeners();
+changeAvatar.setEventListeners();
 
 /* ------------- Валидация ------------- */
 
@@ -175,5 +181,6 @@ const enableValidation = (ValidationOptions) => {
 };
 
 enableValidation(ValidationOptions);
+/* ------------- ------------- */
 
 
