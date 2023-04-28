@@ -16,6 +16,14 @@ export class Card {
         this._likeCounter.textContent = this._likes.length;
     }
 
+    _doIlike() {
+        this._likes.forEach(like => {
+            if (like._id === this._userId) {
+                this._buttonLike.classList.add('elements__like-button_active');
+            }
+        })
+    }
+
     generateElement() {
         this._element = this._templateSelector.cloneNode(true).children[0];
         this._cardImage = this._element.querySelector('.elements__image');
@@ -31,6 +39,7 @@ export class Card {
             this._trashButton.remove();
         }
 
+        this._doIlike();
         this._likeCounter.textContent = this._likes.length;
         this._setEventListeners();
 

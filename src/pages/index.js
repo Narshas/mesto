@@ -27,6 +27,9 @@ Promise.all([api.getDefoltElements(), api.getUserInfo()])
         userInfo.setAvatar(userData)
         createSection.renderItem(cardsData)
     })
+    .catch(err => {
+        console.log(err);
+    })
 
 const userInfo = new UserInfo({
     userNameSelector: '.profile__name',
@@ -44,6 +47,10 @@ const handleProfileFormSubmit = (profileInfo) => {
     api.patchUserInfo(userData)
         .then(res => {
             userInfo.setUserInfo(res);
+            editProfile.close();
+        })
+        .catch(err => {
+            console.log(err);
         })
         .finally(() => {
             editProfile.showLoading(true);
@@ -59,6 +66,10 @@ const handlePlaceFormSubmit = (placeInfo) => {
     api.postNewCard(fieldForm)
         .then(res => {
             createSection.addItem(createCard(res));
+            addPlacePopup.close();
+        })
+        .catch(err => {
+            console.log(err);
         })
         .finally(() => {
             addPlacePopup.showLoading(false);
@@ -69,9 +80,11 @@ const handleAvatarFormSubmit = (avatarData) => {
     changeAvatar.showLoading(true)
     api.patchAvatar(avatarData)
         .then(res => {
-            //console.log('рес в аватархандл', res)
             userInfo.setAvatar(res);
             changeAvatar.close();
+        })
+        .catch(err => {
+            console.log(err);
         })
         .finally(() => {
             changeAvatar.showLoading(false);
@@ -157,7 +170,7 @@ buttonAddCard.addEventListener('click', () => {
 buttonProfile.addEventListener('click', editPopupProfile);
 buttonAvatar.addEventListener('click', () => {
     changeAvatar.open();
-    //formValidators['avatarurl'].cleanValidation();
+    formValidators['avatarurl'].cleanValidation();
 });
 
 editProfile.setEventListeners();

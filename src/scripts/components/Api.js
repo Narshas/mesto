@@ -14,17 +14,11 @@ class Api {
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, { headers: this._headers })
             .then(res => this._testRes(res))
-            .catch(err => {
-                console.log(err)
-            })
     }
 
     getDefoltElements() {
         return fetch(`${this._baseUrl}/cards`, { headers: this._headers })
             .then(res => this._testRes(res))
-            .catch(err => {
-                console.log(err)
-            })
     }
 
     postNewCard(cardInfo) {
@@ -37,9 +31,6 @@ class Api {
             })
         })
             .then(res => this._testRes(res))
-            .catch(err => {
-                console.log(err)
-            })
     }
 
     deleteCard(cardData) {
@@ -48,9 +39,6 @@ class Api {
             headers: this._headers,
         })
             .then(res => this._testRes(res))
-            .catch(err => {
-                console.log(err)
-            })
     }
 
     patchUserInfo(userData) {
@@ -63,9 +51,6 @@ class Api {
             })
         })
             .then(res => this._testRes(res))
-            .catch(err => {
-                console.log(err)
-            })
     }
 
     addlike(cardId) {
@@ -74,9 +59,6 @@ class Api {
             headers: this._headers
         })
             .then(res => this._testRes(res))
-            .catch(err => {
-                console.log(err)
-            })
     }
 
     removeLike(cardId) {
@@ -85,9 +67,6 @@ class Api {
             headers: this._headers
         })
             .then(res => this._testRes(res))
-            .catch(err => {
-                console.log(err)
-            })
     }
 
     patchAvatar(avatarData) {
@@ -99,9 +78,6 @@ class Api {
             })
         })
             .then(res => this._testRes(res))
-            .catch(err => {
-                console.log(err)
-            })
     }
 }
 
