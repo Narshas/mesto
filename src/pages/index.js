@@ -170,7 +170,7 @@ buttonAddCard.addEventListener('click', () => {
 buttonProfile.addEventListener('click', editPopupProfile);
 buttonAvatar.addEventListener('click', () => {
     changeAvatar.open();
-    formValidators['avatarurl'].cleanValidation();
+    formValidators['avatar'].cleanValidation();
 });
 
 editProfile.setEventListeners();
